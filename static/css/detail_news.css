@@ -27,6 +27,9 @@
     padding: 0.188rem 0.438rem 0.563rem 0.438rem;
 }
 
+.detail-news-info {
+    width: 60%;
+}
 .news-content {
     font-family: var(--font-text-content);
     font-size: 0.875rem;
@@ -34,6 +37,13 @@
     line-height: 1.375rem;
     text-align: justify;
     ;
+}
+
+.news-content img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 1rem auto; /* Thêm khoảng trắng trên dưới và căn giữa ảnh */
 }
 
 .tags-news {

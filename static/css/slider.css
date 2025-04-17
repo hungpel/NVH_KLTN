@@ -165,6 +165,114 @@
     }
 }
 
+
+@media (max-width: 576px) {
+    .carousel-caption h5 {
+        font-size: 0.9rem; /* Nhỏ hơn cho màn hình rất nhỏ */
+    }
+
+    .carousel-caption {
+        padding: 8px 10px;
+        font-size: 0.85rem;
+    }
+
+    .detail-button-slider {
+        padding: 6px 12px;
+        font-size: 0.9rem;
+    }
+
+    .custom-indicators {
+        transform: translateX(-50%);
+        bottom: 10px;
+        padding: 5px 10px;
+    }
+
+    .custom-indicators button {
+        width: 10px;
+        height: 10px;
+        border-width: 1px;
+    }
+
+    .carousel-control-next-icon,
+    .carousel-control-prev-icon {
+        padding: 15px 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .carousel-caption {
+        bottom: 8%;
+        padding: 6px 8px;
+        font-size: 0.75rem;
+    }
+
+    .carousel-caption h5 {
+        font-size: 0.8rem;
+        margin-bottom: 0.2rem;
+    }
+
+    .detail-button-slider {
+        padding: 5px 10px;
+        font-size: 0.8rem;
+    }
+
+    .custom-indicators {
+        transform: translateX(-50%);
+        padding: 4px 8px;
+        bottom: 8px;
+    }
+
+    .custom-indicators button {
+        width: 8px;
+        height: 8px;
+        border-width: 1px;
+        transform: scale(0.7);
+    }
+
+    .custom-indicators button.active {
+        transform: scale(0.9);
+    }
+
+    .carousel-control-next-icon,
+    .carousel-control-prev-icon {
+        padding: 10px 10px;
+    }
+}
+
+@media (max-width: 360px) {
+    .carousel-caption {
+        bottom: 6%;
+        padding: 4px 6px;
+        font-size: 0.7rem;
+    }
+
+    .carousel-caption h5 {
+        font-size: 0.7rem;
+    }
+
+    .detail-button-slider {
+        padding: 4px 8px;
+        font-size: 0.75rem;
+    }
+
+    .custom-indicators {
+        padding: 3px 6px;
+    }
+
+    .custom-indicators button {
+        width: 6px;
+        height: 6px;
+        transform: scale(0.6);
+    }
+}
+
+
+.fixed-height-row,
+.fixed-image-container,
+.col-md-8 {
+    transition: all 0.3s ease-in-out;
+}
+
 /* Style cho container bao bọc */
 .gradient-border-container {
     border: 1px;
