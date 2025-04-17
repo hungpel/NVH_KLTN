@@ -1,0 +1,21 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block content %}
+<div id="news_list">
+  <div class="container-fluid news mb-3 pb-3">
+    <div class="container">
+      <div class="row">
+        {% for post in news_paginator %}
+        {% with news_index=current_page_index|slice:forloop.counter|last %}
+          {% include 'components/news_card.html' with post=post news_index=news_index %}
+        {% endwith %}
+        {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% if news_paginator.has_other_pages %}
+  {% include 'components/pagination.html' with paginator_data=news_paginator %}
+{% endif %}
+{% endblock content %}

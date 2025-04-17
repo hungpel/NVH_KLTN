@@ -1,0 +1,140 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block content %}
+<div id="detail-post-body" class="container-fluid py-4">
+    <div class="container">
+        <img src="{% static 'img/banner_couple_friends.png' %}" class="banner-document img-fluid" width="100%" alt="banner">
+    </div>
+
+    <div id="couple-friends-filter">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 d-flex my-3">
+                    <a data-bs-toggle="modal" data-bs-target="#subject-filter">
+                        <button class="btn btn-outline-primary me-3 filter-content">Môn học</button>
+                    </a>
+                    <a href="{% url 'connect-create' %}">
+                        <button class="btn btn-outline-primary filter-content">Tạo yêu cầu</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal modal-fluid modal-vertical fade" id="subject-filter" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog ">
+            <div class="modal-content">
+                <div class="modal-header bg-primary">
+                    <h3 class="modal-header-text text-white mt-2">Môn học</h3>
+                    <button type="button" class="btn-close btn-close-modal" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body modal-content-text">
+                    {% for subject in subjects %}
+                    <a href="?subject={{subject.pk}}">
+                    <button class="mt-2 btn px-2 py-1 text-white {% if subject.selected %}selected-filter-items{% endif %}" style="{% if not subject.selected %}background-color: #777da7;{% endif %}">{{ subject.name }}</button>
+                    </a>
+                    {% endfor %}
+                </div>
+                <div class="modal-footer modal-content-text d-flex justify-content-end">
+                    <button class="btn btn-outline-primary me-3"><strong>Lưu</strong></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-4">
+        <div class="row pb-4 post-user-info d-flex justify-content-center">
+            {% for connect in object_list %}
+            <div class="col-lg-3 col-md-4 col-sm-6 col-12 request-box mx-3 my-2 p-3">
+                <a data-bs-toggle="modal" data-bs-target="#requestBox{{ forloop.counter }}">
+                    <div class="row">
+                        <div class="col-12 d-flex justify-content-start align-items-center pe-0">
+                            <img src="{{ connect.owner.avatar.url }}" class="rounded-circle me-2" height="30px">
+                            {{ connect.owner.user.username }}
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-12 subject-title">
+                            {{ connect.name }}
+                        </div>
+                    </div>
+                    <div class="row mb-1">
+                        <div class="col-12 modal-subject-description">
+                            Môn học: {{ connect.subject }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 subject-description">
+                            {{ connect.description }}
+                        </div>
+                    </div>
+                </a>
+                <div class="row mt-2">
+                    <div class="col-6 d-flex align-items-center">
+                        <img src="{% static 'icons/membersIcon.svg' %}" class="me-2" alt="members-icon">
+                        {{ connect.max_people }}
+                    </div>
+                    <div class="col-6 d-flex align-items-center justify-content-end">
+                        <a href="{% url 'connect-detail' pk=connect.pk %}">
+                        <button class="btn btn-outline-primary connect-btn">Kết nối</button>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="modal modal-fluid modal-vertical fade" id="requestBox{{ forloop.counter }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog ">
+                    <div class="modal-content">
+                        <div class="modal-header bg-primary">
+                            <h3 class="modal-header-text text-white mt-2">Chi tiết yêu cầu</h3>
+                            <button type="button" class="btn-close btn-close-modal" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body modal-content-text">
+                            <div class="row">
+                                <div class="col-12 d-flex justify-content-start align-items-center pe-0">
+                                    <img src="{{ connect.owner.avatar.url }}" class="rounded-circle me-2" height="30px">
+                                    {{ connect.owner.user.username }}
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-12 modal-subject-title">
+                                    {{ connect.name }}
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-4 modal-subject-description">
+                                    <button class="btn px-2 py-1 text-white" style="background-color: #777da7;">{{ connect.subject }}</button>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-12 modal-subject-description">
+                                    {{ connect.description }}
+                                </div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-12 d-flex align-items-center">
+                                    <img src="{% static 'icons/membersIcon.svg' %}" class="me-2" alt="members-icon">
+                                    Số người tham gia tối đa: {{ connect.max_people }}
+                                </div>
+                                <div class="mt-2 col-12 d-flex align-items-center">
+                                    <img src="{% static 'icons/membersIcon.svg' %}" class="me-2" alt="members-icon">
+                                    Số người đang gửi yêu cầu: {{ connect.count_connect }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer modal-content-text d-flex justify-content-end">
+                            <a href="{% url 'connect-detail' pk=connect.pk %}">
+                            <button class="btn btn-outline-primary me-3"><strong>Kết nối</strong></button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% include 'components/pagination.html' with paginator_data=page_obj %}
+{% endblock content %}

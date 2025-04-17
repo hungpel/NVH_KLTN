@@ -1,0 +1,264 @@
+.banner {
+    object-fit: cover;
+}
+
+.bg-item-document {
+    background-color: #f2f4f6;
+}
+
+.document-title {
+    font-family: var(--font-text-header);
+    font-size: 2rem;
+    font-weight: 500;
+    line-height: 2.2rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.document-info, .document-description {
+    font-family: var(--font-text-content);
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.2rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.document-box:hover {
+    cursor: pointer;
+    background-color: lightgray;
+    color: #2172cd;
+}
+
+.document-download:hover {
+    cursor: pointer;
+    color: #2172cd;
+}
+
+.dropdown-menu > a {
+    border-radius: 10px;
+}
+
+.dropdown-menu > a:hover {
+    background-color: lightgray;
+    cursor: pointer;
+}
+
+
+.document-box-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .document-box {
+    background-color: #ffffff;
+    border-radius: 1rem;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    height: 100%;
+    min-height: 200px;
+  }
+
+  .document-box:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.1);
+  }
+
+  .document-title {
+    font-size: 1.6rem; /* LỚN HƠN */
+    line-height: 1.8rem;
+    color: #1e293b;
+  }
+
+  .document-meta {
+    font-size: 0.95rem;
+    flex-wrap: wrap;
+  }
+
+  .document-description {
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+
+
+  /* Style cho các nút môn học trong modal */
+.modal-body.modal-content-text a button {
+  display: inline-block; /* Hiển thị trên cùng một hàng nếu có đủ không gian */
+  padding: 8px 15px;
+  margin-right: 5px; /* Khoảng cách giữa các nút */
+  margin-bottom: 5px;
+  border: none;
+  border-radius: 5px;
+  background-color: #f0f0f0; /* Màu nền mặc định */
+  color: #333; /* Màu chữ mặc định */
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease; /* Hiệu ứng chuyển đổi mượt mà */
+  text-align: center; /* Căn giữa chữ */
+}
+
+.modal-body.modal-content-text a button:hover {
+  background-color: #e0e0e0; /* Màu nền khi hover */
+  color: #007bff; /* Màu chữ khi hover (màu xanh dương primary) */
+}
+
+.modal-body.modal-content-text a button:active {
+  background-color: #007bff; /* Màu nền khi active */
+}
+
+/* Style cho nút môn học đã được chọn */
+.modal-body.modal-content-text a button.selected-filter-items {
+  background-color: #0056b3 !important; /* Màu nền khi được chọn (màu xanh dương primary) */
+  color: white !important;
+  border: 1px solid #0056b3; /* Thêm viền để nhấn mạnh */
+}
+
+.modal-body.modal-content-text a button.selected-filter-items:hover {
+  background-color: #0056b3 !important; /* Màu nền khi hover trên nút đã chọn */
+  color: white !important;
+}
+
+/* Tùy chỉnh thêm cho modal (nếu cần) */
+.modal-content {
+  border-radius: 10px; /* Bo tròn góc modal */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Thêm bóng đổ nhẹ */
+}
+
+.modal-header {
+  border-bottom: 1px solid #dee2e6;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.modal-footer {
+  border-top: 1px solid #dee2e6;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.modal-header-text {
+  margin: 0; /* Loại bỏ margin mặc định của heading */
+}
+
+.btn-close-modal {
+  background-color: transparent;
+  border: none;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+.btn-close-modal:hover {
+  opacity: 1;
+}
+
+.auto-expand {
+  width: 100%;
+  min-height: 40px;
+  resize: none; /* Không cho resize bằng chuột */
+  overflow-y: hidden; /* Ẩn thanh cuộn dọc */
+  transition: height 0.2s ease;
+}
+
+.page-adress {
+  font-size: 0.95rem;
+  font-weight: 500;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.page-adress a {
+  color: #0d6efd;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.page-adress a:hover {
+  color: #084298;
+}
+.page-adress img {
+  height: 12px;
+  margin: 0 4px;
+}
+
+.detail-post-content {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  padding: 2rem;
+  margin-bottom: 1.5rem;
+  transition: all 0.3s ease-in-out;
+}
+
+.detail-post-content:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+
+.post-user-info img {
+  border: 2px solid #e0e0e0;
+}
+
+.post-forum-title {
+  font-size: 1.7rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.tag-button {
+  background-color: #f0f4ff;
+  color: #1a73e8;
+  border: none;
+  border-radius: 20px;
+  font-size: 0.875rem;
+}
+
+.document-download {
+  font-size: 1rem;
+  padding: 0.6rem 1.2rem;
+  background-color: #1a73e8;
+  color: white !important;
+  border-radius: 8px;
+  display: inline-block;
+  transition: background 0.3s;
+}
+
+.document-download:hover {
+  background-color: #155ab6;
+}
+
+.reply-input {
+  width: 100%;
+  min-height: 80px;
+  resize: none;
+  border-radius: 10px;
+  border: 1px solid #ced4da;
+  background-color: #f9f9f9;
+  transition: 0.2s;
+}
+
+.reply-input:focus {
+  border-color: #1a73e8;
+  background-color: #fff;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(26, 115, 232, 0.1);
+}
+
+#button-comment {
+  font-weight: 500;
+}
+
+.breadcrumb .breadcrumb-item {
+  color: #6c757d;
+  font-weight: 500;
+}
+
+.current-page {
+  color: #000;
+  font-weight: 600;
+}

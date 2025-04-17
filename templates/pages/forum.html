@@ -1,0 +1,84 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <img src="{% static 'img/banner_forum.png' %}" class="banner-forum img-fluid" width="100%" alt="banner">
+</div>
+
+<div id="forum-filter">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 d-flex my-3">
+                <a data-bs-toggle="modal" data-bs-target="#category-filter">
+                    <button class="btn btn-outline-primary me-3 filter-content">Danh mục</button>
+                </a>
+                <a href="{% url 'forum-create' %}">
+                    <button class="btn btn-outline-primary filter-content">Thêm thảo luận</button>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal modal-fluid modal-vertical fade" id="category-filter" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog ">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <h3 class="modal-header-text text-white mt-2">Danh mục</h3>
+                <button type="button" class="btn-close btn-close-modal" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body modal-content-text">
+                {% for category in categories %}
+                <a href="?category={{ category.pk }}">
+                <button class="mt-2 btn px-2 py-1 text-white {% if category.selected %}selected-filter-items{% endif %}" style="{% if not category.selected %}background-color: #777da7;{% endif %}">{{ category.name }}</button>
+                </a>
+                {% endfor %}
+            </div>
+            <div class="modal-footer modal-content-text d-flex justify-content-end">
+                <button class="btn btn-outline-primary me-3"><strong>Lưu</strong></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="forum-content">
+    <div class="container mb-4">
+        <div class="row header-table pb-3 border-bottom-1 px-3">
+            <div class="col-md-6 col-12 d-flex justify-content-start">Nội dung</div>
+            <div class="col-md-2 d-none d-md-flex justify-content-center">Danh mục</div>
+            <div class="col-md-1 d-none d-md-flex justify-content-center">Lượt thích</div>
+            <div class="col-md-1 d-none d-md-flex justify-content-center">Phản hồi</div>
+            <div class="col-md-2 d-none d-md-flex justify-content-center">Ngày đăng</div>
+        </div>
+        {% for forum in object_list %}
+        <a href="{% url 'forum-detail' pk=forum.pk %}">
+            <div class="row content-table py-4 px-3 {% if forloop.counter|divisibleby:2 %}bg-post-forum{% endif %}">
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-2 d-flex justify-content-center align-items-center">
+                            <img src="{{ forum.owner.avatar.url }}" class="rounded-circle" height="40px">
+                        </div>
+                        <div class="col-10 post-sub-title d-flex justify-content-center align-items-center">
+                            <div class="row">
+                                <div>{{ forum.description }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 d-none d-md-flex justify-content-center align-items-center">
+                    {% comment %} TODO: add category and color {% endcomment %}
+                    {% if forum.category %} <button class="btn px-2 py-1 text-white" style="background-color: #777da7;">{{ forum.category }} </button>{% endif %}
+                </div>
+                <div class="col-md-1 d-none d-md-flex likes-number justify-content-center align-items-center">{{ forum.like_count }}</div>
+                <div class="col-md-1 d-none d-md-flex replies-number justify-content-center align-items-center"><strong>{{ forum.comment_count }}</strong></div>
+                <div class="col-md-2 d-none d-md-flex date-info justify-content-center align-items-center">{{ forum.created_at|date:"d/m/Y" }}</div>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+</div>
+
+{% include 'components/pagination.html' with paginator_data=page_obj %}
+
+{% endblock content %}

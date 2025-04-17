@@ -1,0 +1,102 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block content %}
+<form id="detail-post-body" class="container-fluid py-4" method="post" action="{% url 'add-connect' %}">
+    <div class="pb-4">
+        <div class="col page-adress d-flex align-items-center justify-content-center">
+          <a href="{% url 'home' %}">
+            <p class="mb-0">TRANG CHỦ</p>
+          </a>
+          <span class="d-flex align-items-center"><img src="{% static 'icons/arrowRightBlack.svg' %}" class="w-100" alt="arrow"></span>
+          <a href="{% url 'connects-list' %}">
+            <p class="mb-0">KẾT NỐI</p>
+          </a>
+          <span class="d-flex align-items-center"><img src="{% static 'icons/arrowRightBlack.svg' %}" class="w-100" alt="arrow"></span>
+          <p class="current-page">GỬI YÊU CẦU KẾT NỐI</p>
+        </div>
+    </div>
+
+    <div class="container detail-post-content">
+        {% if messages %}
+        <div class="alert alert-success">
+            {% for message in messages %}
+            <strong>Success!</strong> {{ message }}
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <div class="row py-4 post-user-info">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-11 col-sm-8 col-12">
+                <img src="{{ object.owner.avatar.url }}" class="rounded-circle me-2" height="40px">
+                {{ object.owner.user.username }}
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-11 col-12 pb-1">
+                <div class="mb-3 modal-subject-title">
+                    {{ object.name }}
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-2">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-11 col-12">
+                <div class="mb-3 modal-subject-description">
+                    <button class="btn px-2 py-1 text-white" style="background-color: #777da7;">{{ connect.subject }}</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-2">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-11 col-12 pb-4 modal-subject-description">
+                {{ object.description }}
+            </div>
+        </div>
+
+        <div class="row mt-2">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-11 col-12 pb-4 modal-subject-description">
+                <img src="{% static 'icons/membersIcon.svg' %}" class="me-2" alt="members-icon">
+                Số người tham gia tối đa: {{ object.max_people }}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-11 col-12 pb-4 modal-subject-description">
+                <img src="{% static 'icons/membersIcon.svg' %}" class="me-2" alt="members-icon">
+                Số người đang tham gia: {{ object.count_connect }}
+            </div>
+        </div>
+    </div>
+    <input name="connect" value="{{ connect.pk }}" hidden/>
+
+    <div class="container detail-post-content">
+        <div class="row pt-3 mt-3">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-11 col-12 pb-4">
+                <div class="mb-3">
+                    <label for="forumDescription" class="form-label post-forum-title">Nội dung lời nhắn</label>
+                    <textarea class="form-control post-forum-text" name="message" id="forumDescription" rows="4" cols="100%"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="row post-forum-text">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-6 col-12 pb-4 d-flex">
+                <a href="{% url 'connects-list' %}">
+                <button class="btn px-2 py-1 me-2 btn-outline-primary d-flex align-items-center">
+                    Gửi yêu cầu kết nối
+                </button>
+                </a>
+            </div>
+        </div>
+    </div>
+</form>
+
+{% endblock content %}

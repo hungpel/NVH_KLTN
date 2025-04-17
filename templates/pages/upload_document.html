@@ -1,0 +1,223 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+    body {
+        background: linear-gradient(to bottom right, #f0f2f5, #d9e4f5);
+        font-family: 'Segoe UI', sans-serif;
+    }
+
+    .upload-container {
+        max-width: 700px;
+        margin: auto;
+        background: rgba(255, 255, 255, 0.75);
+        border-radius: 20px;
+        padding: 2rem;
+        box-shadow: 0 8px 32px rgba(31, 38, 135, 0.2);
+        backdrop-filter: blur(10px);
+    }
+
+    .form-floating label {
+        color: #6c757d;
+    }
+
+    .file-dropzone {
+        border: 2px dashed #0d6efd;
+        border-radius: 12px;
+        padding: 2rem;
+        text-align: center;
+        cursor: pointer;
+        background-color: #f8f9fa;
+        transition: all 0.3s ease;
+    }
+
+    .file-dropzone:hover {
+        background-color: #e9f0ff;
+    }
+
+    .file-info {
+        margin-top: 15px;
+        border: 1px solid #dee2e6;
+        border-radius: 10px;
+        padding: 10px;
+        background-color: #fefefe;
+        display: none;
+    }
+
+    .file-info p {
+        margin: 0;
+        font-size: 0.95rem;
+    }
+
+    .progress-container {
+        margin-top: 20px;
+        display: none;
+    }
+
+    .progress {
+        height: 20px;
+        border-radius: 10px;
+        overflow: hidden;
+        background-color: #dee2e6;
+    }
+
+    .progress-bar {
+        background: linear-gradient(to right, #0d6efd, #4facfe);
+        transition: width 0.4s ease;
+    }
+
+    .btn-upload {
+        background-color: #0d6efd;
+        color: white;
+        padding: 10px 24px;
+        border: none;
+        border-radius: 10px;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .btn-upload:hover {
+        background-color: #0b5ed7;
+        transform: scale(1.03);
+    }
+</style>
+
+<div class="container py-5">
+    <div class="upload-container">
+        <form id="documentForm" method="post" action="{% url 'document-create' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <h3 class="mb-4 text-center">📄 Đóng góp tài liệu</h3>
+
+            {% if messages %}
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {% for message in messages %}
+                <strong>✔️</strong> {{ message }}
+                {% endfor %}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endif %}
+
+            <!-- Floating Label Input -->
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="documentName" name="name" placeholder="Tên tài liệu" required>
+                <label for="documentName">Tên tài liệu</label>
+            </div>
+
+            <!-- Subject -->
+            <div class="form-floating mb-3">
+                <select class="form-select" id="subjectSelect" name="subject" required>
+                    <option value="" disabled selected>Chọn môn học</option>
+                    {% for subject in subjects %}
+                    <option value="{{ subject.pk }}">{{ subject.name }}</option>
+                    {% endfor %}
+                </select>
+                <label for="subjectSelect">Môn học</label>
+            </div>
+
+            <!-- Description -->
+            <div class="form-floating mb-3">
+                <textarea class="form-control" name="description" placeholder="Mô tả tài liệu" id="documentDescription" style="height: 100px;" required></textarea>
+                <label for="documentDescription">Mô tả tài liệu</label>
+            </div>
+
+            <!-- File Upload with Drag & Drop -->
+            <div id="dropzone" class="file-dropzone mb-3">
+                <p>📎 Kéo và thả tài liệu vào đây hoặc bấm để chọn tệp</p>
+                <input type="file" name="file" id="fileInput" style="display: none;" required>
+            </div>
+
+            <!-- File Preview -->
+            <div class="file-info" id="fileInfo">
+                <p><strong>Tệp:</strong> <span id="fileName"></span></p>
+                <p><strong>Dung lượng:</strong> <span id="fileSize"></span></p>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="progress-container" id="progressContainer">
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" style="width: 0%"></div>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="text-end mt-4">
+                <button type="submit" class="btn-upload">🚀 Gửi tài liệu</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    const dropzone = document.getElementById('dropzone');
+    const fileInput = document.getElementById('fileInput');
+    const fileInfo = document.getElementById('fileInfo');
+    const fileName = document.getElementById('fileName');
+    const fileSize = document.getElementById('fileSize');
+    const form = document.getElementById('documentForm');
+    const progressContainer = document.getElementById('progressContainer');
+    const progressBar = document.querySelector('.progress-bar');
+
+    dropzone.addEventListener('click', () => fileInput.click());
+
+    dropzone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        dropzone.style.backgroundColor = '#d0e7ff';
+    });
+
+    dropzone.addEventListener('dragleave', () => {
+        dropzone.style.backgroundColor = '#f8f9fa';
+    });
+
+    dropzone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        fileInput.files = e.dataTransfer.files;
+        showFileInfo(fileInput.files[0]);
+        dropzone.style.backgroundColor = '#f8f9fa';
+    });
+
+    fileInput.addEventListener('change', () => {
+        if (fileInput.files[0]) {
+            showFileInfo(fileInput.files[0]);
+        }
+    });
+
+    function showFileInfo(file) {
+        fileName.textContent = file.name;
+        fileSize.textContent = (file.size / 1024).toFixed(2) + ' KB';
+        fileInfo.style.display = 'block';
+    }
+
+    form.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const formData = new FormData(form);
+        const xhr = new XMLHttpRequest();
+
+        xhr.open('POST', form.action, true);
+
+        xhr.upload.addEventListener('progress', function (e) {
+            if (e.lengthComputable) {
+                progressContainer.style.display = 'block';
+                const percent = Math.round((e.loaded / e.total) * 100);
+                progressBar.style.width = percent + '%';
+                progressBar.textContent = percent + '%';
+            }
+        });
+
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                progressBar.style.width = '100%';
+                progressBar.classList.add('bg-success');
+                progressBar.textContent = '✔️ Thành công!';
+                setTimeout(() => window.location.reload(), 1500);
+            } else {
+                progressBar.classList.add('bg-danger');
+                progressBar.textContent = '❌ Lỗi tải lên!';
+            }
+        };
+
+        xhr.send(formData);
+    });
+</script>
+{% endblock content %}

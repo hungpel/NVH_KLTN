@@ -1,0 +1,91 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Đăng nhập</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="{% static 'img/logo_favico.png' %}">
+    <link href='https://fonts.googleapis.com/css?family=Big Shoulders Display' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Manrope' rel='stylesheet'>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/vendors/login/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/vendors/login/font-awesome.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/vendors/login/icon-font.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/vendors/login/util.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/vendors/login/main.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/vendors/login/extra_login.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap" rel="stylesheet">
+    <meta name="robots" content="noindex, follow">
+    <style>
+        .uniconnect-text {
+            font-family: Stencil, sans-serif; /* Thay 'Tên Font Stencil Bạn Chọn' bằng tên font bạn đã import */
+            font-size: 2.8em; /* Điều chỉnh kích thước */
+            font-weight: bold; /* Thường thì font stencil đã khá đậm */
+            letter-spacing: 1.5px; /* Có thể tăng khoảng cách  chữ để làm nổi bật các khoảng trống */
+            color: #3399FF	; /* Chọn màu phù hợp */
+            text-transform: uppercase; /* Thường font stencil đẹp hơn khi viết hoa */
+            /* Thêm các thuộc tính CSS khác nếu cần */
+        }
+    </style>
+</head>
+<body>
+    <section class="h-100 gradient-form" style="background-image: url(../static/img/background_login.png); background-size: cover;">
+        <div class="container py-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-xl-10">
+                    <div class="card rounded-3 text-black">
+                        <div class="row g-0">
+                            <div class="col-lg-6">
+                                <div class="card-body p-md-5 mx-md-4">
+
+                                    <div class="text-center">
+                                        <img src="{% static 'img/uet1_logo.jpg' %}" alt="Logo UET" height="100" class="d-inline-block align-top">
+                                        <h4 class="mt-5 mb-1 pb-1 uniconnect-text" >UNICONNECT</h4>
+                                    </div>
+                                    <form class="login100-form validate-form p-b-33 p-t-5" method="POST" action="{% url 'login' %}">
+                                        {% csrf_token %}
+                                        <div class="wrap-input100 validate-input" data-validate="Enter student id">
+                                            <input class="input100" type="text" name="username" placeholder="Tên đăng nhập">
+                                            <span class="focus-input100" data-placeholder=""></span>
+                                        </div>
+                                        <div class="wrap-input100 validate-input" data-validate="Enter password">
+                                            <input class="input100" type="password" name="password" placeholder="Mật khẩu">
+                                            <span class="focus-input100" data-placeholder=""></span>
+                                        </div>
+                                        <div class="justify-content-center d-flex">
+                                            {% if form.errors %}
+                                            <p class="text-danger">Your username and password didn't match. Please try again.</p>
+                                            {% endif %}
+                                        </div>
+                                        <div class="mt-3 px-3 d-flex justify-content-end">
+                                            <a href="{% url 'register' %}" class="register px-3">
+                                                <strong>Đăng ký</strong>
+                                            </a>
+                                            {% comment %} <a href="" class="forgot-password">
+                                                <strong>Quên mật khẩu?</strong>
+                                            </a> {% endcomment %}
+                                        </div>
+                                        <div class="container-login100-form-btn m-t-32">
+                                            <button style="border-radius: 25px;" class="gradient-custom-2 login100-form-btn" type="submit">Đăng nhập</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
+                                <div class="text-white px-3 py-4 p-md-5 mx-md-4">
+                                    <h4 style="font-family: Stencil, sans-serif; font-size: 1.8em; font-weight: bold; letter-spacing: 1.5px;" class="mb-4">UniConnect</h4>
+                                    <p style="  text-align: justify;" class="mb-0">Bạn muốn tìm kiếm những người bạn cùng chung đam mê, cập nhật lịch trình các câu lạc bộ, hay đơn giản là cần một nơi để chia sẻ những khó khăn trong học tập? UNICONNECT là nền tảng trực tuyến được xây dựng dành riêng cho sinh viên UET, nơi bạn có thể dễ dàng kết nối, chia sẻ thông tin, tham gia các hoạt động và cùng nhau phát triển. Hãy khám phá UNICONNECT ngay hôm nay để không bỏ lỡ bất kỳ khoảnh khắc đáng nhớ nào trong quãng đời sinh viên của bạn!</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

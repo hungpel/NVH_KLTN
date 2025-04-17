@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng ký</title>
+    <link rel="icon" type="image/png" href="../static/img/logo_favico.png">
+    <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500&family=Work+Sans:wght@300;400&family=Manrope&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Work Sans', sans-serif;
+            background: linear-gradient(135deg,
+                #abd6da 0%,   /* Cyan blue */
+                #3b82f6 25%,  /* Blue-500 */
+                #8e90f6 50%,  /* Indigo-500 */
+                #1d4ed8 75%,  /* Blue-700 */
+                #6e7ce6 100%  /* Cyan blue */
+            );
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(15px);
+            border-radius: 25px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+            padding: 3rem 2rem;
+            max-width: 960px;
+            width: 100%;
+        }
+
+        .title {
+            font-family: 'Big Shoulders Display';
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #222;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* 2 cột bằng nhau */
+            gap: 1.5rem;
+        }
+
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .label {
+            font-family: 'Big Shoulders Display';
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-wrapper i {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #888;
+        }
+
+        .input--style-4 {
+            padding: 0.75rem 1rem 0.75rem 2.5rem;
+            border: 1px solid #ccc;
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .input--style-4:focus {
+            outline: none;
+            border-color: #00acc1;
+            box-shadow: 0 0 10px rgba(0, 172, 193, 0.3);
+        }
+
+        .radio-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding-top: 0.5rem;
+        }
+
+        .radio-container label {
+            font-size: 1rem;
+        }
+
+        .btn {
+            background-color: #00acc1;
+            color: white;
+            padding: 0.75rem 2rem;
+            border: none;
+            border-radius: 15px;
+            font-family: 'Manrope';
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s;
+            margin-top: 2rem;
+        }
+
+        .btn:hover {
+            background-color: #00838f;
+            transform: translateY(-2px);
+        }
+
+        .text-danger {
+            color: red;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+        }
+
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2.2rem;
+            }
+
+            .glass-card {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<form action="{% url 'register' %}" method="post">
+    {% csrf_token %}
+    <div class="glass-card">
+        <h2 class="title">Đăng ký</h2>
+        <div class="form-grid">
+            <div class="input-group">
+                <label class="label">Tên đăng nhập</label>
+                <div class="input-wrapper">
+                    <i class="fa fa-user"></i>
+                    <input class="input--style-4" type="text" name="username" required>
+                </div>
+                {% if form.errors.username %}<p class="text-danger">{{ form.errors.username }}</p>{% endif %}
+            </div>
+            <div class="input-group">
+
+            </div>
+            <div class="input-group">
+                <label class="label">Mật khẩu</label>
+                <div class="input-wrapper">
+                    <i class="fa fa-lock"></i>
+                    <input class="input--style-4" type="password" name="password1" required>
+                </div>
+                {% if form.errors.password1 %}<p class="text-danger">{{ form.errors.password1 }}</p>{% endif %}
+            </div>
+            <div class="input-group">
+                <label class="label">Nhập lại mật khẩu</label>
+                <div class="input-wrapper">
+                    <i class="fa fa-lock"></i>
+                    <input class="input--style-4" type="password" name="password2" required>
+                </div>
+                {% if form.errors.password2 %}<p class="text-danger">{{ form.errors.password2 }}</p>{% endif %}
+            </div>
+            <div class="input-group">
+                <label class="label">Họ</label>
+                <div class="input-wrapper">
+                    <i class="fa fa-user"></i>
+                    <input class="input--style-4" type="text" name="first_name" required>
+                </div>
+                {% if form.errors.first_name %}<p class="text-danger">{{ form.errors.first_name }}</p>{% endif %}
+            </div>
+            <div class="input-group">
+                <label class="label">Tên</label>
+                <div class="input-wrapper">
+                    <i class="fa fa-user"></i>
+                    <input class="input--style-4" type="text" name="last_name" required>
+                </div>
+                {% if form.errors.last_name %}<p class="text-danger">{{ form.errors.last_name }}</p>{% endif %}
+            </div>
+            <div class="input-group">
+                <label class="label">Mã số sinh viên</label>
+                <div class="input-wrapper">
+                    <i class="fa fa-id-card"></i>
+                    <input class="input--style-4" type="text" name="code" required>
+                </div>
+                {% if form.errors.code %}<p class="text-danger">{{ form.errors.code }}</p>{% endif %}
+            </div>
+            <div class="input-group">
+                <label class="label">Giới tính</label>
+                <div class="radio-container">
+                    <label><input type="radio" name="gender" value="Nam" checked> Nam</label>
+                    <label><input type="radio" name="gender" value="Nữ"> Nữ</label>
+                </div>
+            </div>
+            <div class="input-group">
+                <label class="label">Lớp khóa học</label>
+                <div class="input-wrapper">
+                    <i class="fa fa-graduation-cap"></i>
+                    <input class="input--style-4" type="text" name="classroom" required>
+                </div>
+                {% if form.errors.classroom %}<p class="text-danger">{{ form.errors.classroom }}</p>{% endif %}
+            </div>
+            <div class="input-group">
+                <label class="label">Email</label>
+                <div class="input-wrapper">
+                    <i class="fa fa-envelope"></i>
+                    <input class="input--style-4" type="email" name="email" required>
+                </div>
+                {% if form.errors.email %}<p class="text-danger">{{ form.errors.email }}</p>{% endif %}
+            </div>
+        </div>
+        <div style="text-align: center;">
+            <input type="submit" class="btn" value="Đăng ký">
+        </div>
+    </div>
+</form>
+</body>
+</html>

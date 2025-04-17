@@ -1,0 +1,215 @@
+.custom-fixed-slide-carousel {
+    overflow: hidden;
+    margin-top: 20px; /* Thêm khoảng cách phía trên */
+    margin-bottom: 20px; /* Thêm khoảng cách phía dưới */
+}
+
+.fixed-height-row {
+    display: flex;
+    height: 500px; /* Đặt chiều cao cố định mong muốn */
+    margin-left: 0;
+    margin-right: 0;
+    align-items: stretch; /* Kéo dài các cột bằng chiều cao nhau */
+}
+
+.fixed-image-container {
+    flex: 0 0 33.333%;
+    max-width: 33.333%;
+    height: 100%;
+    padding-right: 10px; /* Thêm khoảng cách giữa ảnh cố định và slider */
+}
+
+.fixed-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Làm đầy và cắt nếu cần */
+    border-radius: 5px; /* Thêm bo góc nhẹ */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Thêm bóng nhẹ */
+}
+
+.col-md-8 {
+    flex: 0 0 66.666%;
+    max-width: 66.666%;
+    height: 100%;
+    padding-left: 0;
+}
+
+.carousel {
+    height: 100%;
+    border-radius: 5px; /* Thêm bo góc nhẹ */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Thêm bóng nhẹ */
+    /* margin-left: 200px; */
+}
+
+.carousel-indicators {
+    margin-bottom: 0px;
+}
+
+.carousel-inner,
+.carousel-item,
+.slider-image-inner,
+.slider-image {
+    height: 100%;
+    object-fit: cover; /* Làm đầy và cắt nếu cần */
+    border-radius: 5px; /* Đảm bảo ảnh trong slider cũng có bo góc */
+}
+
+.carousel-caption {
+    position: absolute;
+    bottom: 12%; /* Điều chỉnh vị trí gần hơn một chút */
+    left: 10%;
+    right: 10%;
+    color: white; /* Màu chữ nổi bật (ví dụ: trắng) */
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.6); /* Nền đen mờ hơn một chút để chữ nổi bật */
+    padding: 10px 15px; /* Giảm padding để chữ trông nhỏ gọn hơn */
+    border-radius: 20px;
+    z-index: 10;
+}
+
+.carousel-caption h5 {
+    font-size: 1rem; /* Kích thước tiêu đề nhỏ hơn */
+    color: #FFFFE0;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+    font-weight: bold; /* Làm cho tiêu đề đậm hơn */
+    margin-bottom: 0.3rem; /* Giảm khoảng cách với mô tả (nếu có) */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8); /* Thêm bóng đổ chữ để nổi bật trên nền ảnh */
+}
+
+.carousel-control-next-icon,
+.carousel-control-prev-icon {
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 30px;
+    border-radius: 30px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Bóng đổ nhẹ */
+}
+
+.detail-button-slider {
+    background-color: #007bff; /* Màu xanh dương nổi bật */
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Hiệu ứng chuyển màu khi hover */
+    text-decoration: none !important; /* Đảm bảo không có gạch chân */
+}
+
+.detail-button-slider:hover {
+    background-color: #0056b3; /* Màu xanh đậm hơn khi hover */
+}
+
+.custom-indicators {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-125%);
+    z-index: 15;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 15px;
+    border-radius: 25px;
+    background-color: rgba(255, 255, 255, 0.7); /* Nền trắng trong suốt */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Bóng đổ nhẹ */
+}
+
+.custom-indicators button {
+    /* width: 16px;
+    height: 16px; */
+    border: 2px solid #ccc; /* Viền xám nhạt */
+    background-color: #CCFFFF; /* Nền xám rất nhạt */
+    opacity: 0.8;
+    cursor: pointer;
+    transition: background-color 0.3s ease, border-color 0.3s ease, opacity 0.3s ease, transform 0.2s ease-in-out;
+    transform: scale(0.8);
+}
+
+.custom-indicators button:hover {
+    opacity: 1;
+    transform: scale(1);
+    background-color: #DD0000; /* Nền xám nhạt hơn khi hover */
+}
+
+.custom-indicators button.active {
+    transform: scale(1.1);
+    background-color: #DD0000; /* Xanh dương chủ đạo */
+    opacity: 1;
+    /* box-shadow: 0 2px 5px rgba(153, 186, 220, 0.5); Bóng đổ màu xanh */
+}
+
+/* Responsive adjustments (ví dụ cho màn hình nhỏ hơn) */
+@media (max-width: 768px) {
+    .fixed-height-row {
+        flex-direction: column; /* Chuyển thành cột trên màn hình nhỏ */
+        height: auto; /* Chiều cao tự động */
+    }
+
+    .fixed-image-container {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        margin-bottom: 10px; /* Thêm khoảng cách phía dưới ảnh cố định */
+        padding-right: 0;
+    }
+
+    .col-md-8 {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        padding-left: 0;
+    }
+}
+
+/* Style cho container bao bọc */
+.gradient-border-container {
+    border: 1px;
+    border-radius: 10px;
+    padding: 30px;
+    overflow: hidden;
+    background:rgba(12, 12, 12, 0.5);
+    background-size: 400% 400%;
+    animation: gradientAnimationImproved 10s ease infinite;
+    padding: 3px; /* Tạo hiệu ứng border ngoài */
+    box-shadow: 0 4px 30px rgba(0, 123, 255, 0.2);
+
+}
+
+.carousel-inner {
+    overflow: visible;
+    padding: 1px;
+    z-index: 1;
+}
+
+.slider-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Làm đầy và cắt nếu cần */
+    border-radius: 5px; /* Thêm bo góc nhẹ */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Thêm bóng nhẹ */
+}
+/* Đảm bảo background của row và các col là màu mặc định */
+.fixed-height-row {
+    background-color: transparent; /* Hoặc màu nền bạn muốn */
+}
+
+.fixed-image-container {
+    background-color: transparent; /* Hoặc màu nền bạn muốn */
+    padding-right: 3px; /* Giữ khoảng cách */
+}
+
+.col-md-8 {
+    background-color: transparent; /* Hoặc màu nền bạn muốn */
+    padding-left: 0;
+}
+
+#carouselExampleDark.carousel {
+    border-radius: inherit; /* Kế thừa border-radius từ container */
+    overflow: hidden; /* Đảm bảo nội dung carousel không tràn */
+    background-color: transparent; /* Hoặc màu nền bạn muốn cho slider */
+}

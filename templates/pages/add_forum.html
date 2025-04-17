@@ -1,0 +1,70 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block content %}
+<form action="{% url 'forum-create' %}" method="post" id="detail-post-body" class="container-fluid py-4">
+    <div class="pb-4">
+        <div class="col page-adress d-flex align-items-center justify-content-center">
+          <a href="{% url 'home' %}">
+            <p class="mb-0">TRANG CHỦ</p>
+          </a>
+          <span class="d-flex align-items-center"><img src="{% static 'icons/arrowRightBlack.svg' %}" class="w-100" alt="arrow"></span>
+          <a href="{% url 'forums-list' %}">
+            <p class="mb-0">DIỄN ĐÀN</p>
+          </a>
+          <span class="d-flex align-items-center"><img src="{% static 'icons/arrowRightBlack.svg' %}" class="w-100" alt="arrow"></span>
+          <p class="current-page">THÊM THẢO LUẬN</p>
+        </div>
+    </div>
+
+    <div class="container detail-post-content">
+        <div class="row py-4 post-user-info">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-11 col-sm-8 col-12">
+                <img src="{{ request.user.student.avatar.url }}" class="rounded-circle me-2" height="40px" width="40px" style="object-fit: cover;">
+                {{ request.user.username }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-11 col-12 post-forum-title">
+                <div class="mb-3">
+                    <label for="forumName" class="form-label">Tiêu đề</label>
+                    <input type="text" name="name" class="form-control" id="forumName">
+                  </div>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-11 col-12">
+                <div class="mb-3">
+                    <label for="forumName" class="form-label post-forum-title">Danh mục</label>
+                    <select class="form-select post-forum-text" name="category" aria-label="Default select example">
+                        <option selected value="">Chọn chủ đề</option>
+                        {% for category in categories %}
+                        <option value="{{ category.pk }}">{{ category.name }}</option>
+                        {% endfor %}
+                      </select>
+                  </div>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-11 col-12 pb-4">
+                <div class="mb-3">
+                    <label for="forumDescription" class="form-label post-forum-title">Nội dung thảo luận</label>
+                    <textarea class="form-control post-forum-text" id="forumDescription" name="description" rows="4" cols="100%"></textarea>
+                  </div>
+            </div>
+        </div>
+        <div class="row post-forum-text">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-6 col-12 pb-4 d-flex">
+                <input type="submit" class="btn px-2 py-1 me-2 btn-outline-primary d-flex align-items-center" value="Đăng thảo luận">
+                </input>
+            </div>
+        </div>
+    </div>
+</form>
+
+{% endblock content %}

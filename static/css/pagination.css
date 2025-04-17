@@ -1,0 +1,81 @@
+.pagination {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-radius: 0.25rem; /* Bo tròn góc ngoài */
+    overflow: hidden; /* Ẩn các góc bo tròn của li */
+}
+
+.page-item {
+    margin: 0; /* Loại bỏ khoảng cách mặc định giữa các li */
+}
+
+.page-link {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 0.75rem;
+    line-height: 1.25;
+    color: #007bff; /* Màu chữ mặc định */
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    text-decoration: none;
+    min-width: 2.5rem; /* Đảm bảo các nút có kích thước tối thiểu */
+    text-align: center;
+}
+
+.page-link:hover {
+    color: #0056b3; /* Màu chữ khi hover */
+    background-color: #e9ecef;
+}
+
+.page-item:first-child .page-link {
+    border-top-left-radius: 0.25rem;
+    border-bottom-left-radius: 0.25rem;
+    border-left: 1px solid #dee2e6; /* Đảm bảo có border trái */
+}
+
+.page-item:last-child .page-link {
+    border-top-right-radius: 0.25rem;
+    border-bottom-right-radius: 0.25rem;
+    border-right: 1px solid #dee2e6; /* Đảm bảo có border phải */
+}
+
+.page-item.active .page-link {
+    color: #fff; /* Màu chữ trang hiện tại */
+    background-color: #007bff; /* Màu nền trang hiện tại */
+    border-color: #007bff;
+}
+
+.page-item.disabled .page-link {
+    color: #6c757d; /* Màu chữ khi disabled */
+    background-color: #fff;
+    border-color: #dee2e6;
+    pointer-events: none; /* Ngăn chặn tương tác */
+}
+
+/* Tùy chỉnh cho nút Previous/Next (sử dụng ký tự mũi tên) */
+.page-link[aria-label="Previous"],
+.page-link[aria-label="Next"] {
+    font-size: 0.8rem;
+}
+
+/* Hoặc sử dụng icon SVG (nếu bạn muốn giữ lại cách cũ) */
+.page-item-news-arrow .page-link {
+    padding: 0.25rem 0.5rem; /* Điều chỉnh padding cho vừa icon */
+    min-width: auto; /* Loại bỏ min-width để vừa icon */
+    border: none; /* Loại bỏ border mặc định */
+    background-color: transparent; /* Nền trong suốt */
+}
+
+.page-item-news-arrow .page-link:hover {
+    background-color: rgba(0, 0, 0, 0.05); /* Hiệu ứng hover nhẹ */
+}
+
+.news-pagination-item-selected {
+    background-color: #007bff !important;
+    color: white !important;
+    border-color: #007bff !important;
+}

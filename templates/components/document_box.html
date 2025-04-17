@@ -1,0 +1,44 @@
+{% load static %}
+
+<a href="{% url 'document-detail' pk=document.pk %}" class="document-box-link {% if is_home_page %}document-box-home{% endif %}">
+  <div class="document-box p-4">
+
+    <!-- Tiêu đề tài liệu -->
+    <div class="row mb-3">
+      <div class="col-12 document-title fw-bold">
+        {{ document.name }}
+      </div>
+    </div>
+
+    <!-- Thông tin người đăng, thời gian, bình luận (trên 1 hàng) -->
+    <div class="row align-items-center mb-3 document-meta text-muted flex-wrap">
+      <!-- Avatar + tên người đăng -->
+      <div class="d-flex align-items-center me-4 mb-2">
+        <img src="{{ document.owner.avatar.url }}" class="rounded-circle me-2 shadow-sm" alt="avatar" height="45" width="45" style="object-fit: cover;">
+        <span class="fw-medium">{{ document.owner.user }}</span>
+      </div>
+
+      <!-- Thời gian -->
+      <div class="d-flex align-items-center me-4 mb-2">
+        <img src="{% static 'icons/clockIcon.svg' %}" class="me-2" alt="Clock Icon" width="18">
+        <span>{{ document.created_at|date:"d/m/Y" }}</span>
+      </div>
+
+      <!-- Bình luận -->
+      {% if not is_home_page %}
+      <div class="d-flex align-items-center mb-2">
+        <img src="{% static 'icons/commentsIcon.svg' %}" class="me-2" alt="Comments Icon" width="18">
+        <span>{{ document.comment_count }} bình luận</span>
+      </div>
+      {% endif %}
+    </div>
+
+    <!-- Mô tả -->
+    <div class="row">
+      <div class="col-12 document-description text-secondary">
+        <b>Mô tả:</b> {{ document.description|truncatechars:150 }}
+      </div>
+    </div>
+
+  </div>
+</a>

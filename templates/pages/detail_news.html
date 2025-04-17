@@ -1,0 +1,91 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block content %}
+<div id="mainNews">
+  <div class="container-fluid ps-0 pe-0">
+    <div class="pt-4 pb-4">
+      <div class="col page-adress d-flex align-items-center justify-content-center">
+        <a href="{% url 'home' %}">
+          <p class="mb-0">TRANG CHỦ</p>
+        </a>
+        <span class="d-flex align-items-center"><img src="{% static 'icons/arrowRightBlack.svg' %}" class="w-100" alt="arrow"></span>
+        <a href="{% url 'news' %}">
+          <p class="mb-0">TIN TỨC</p>
+        </a>
+        <span class="d-flex align-items-center"><img src="{% static 'icons/arrowRightBlack.svg' %}" class="w-100" alt="arrow"></span>
+        <p class="current-page">CHI TIẾT</p>
+      </div>
+    </div>
+
+    <div class="bg-white d-flex justify-content-center">
+        <div class="col-md-10 col d-flex justify-content-center">
+            <img src="{% if post.main_image %}{{ post.main_image.url }}{% else %}{% static 'img/news/default-image.jpg' %}{% endif %}" class="news-main-image w-100 ps-1 pe-1 pt-3 pb-3" alt="detail-product">
+        </div>
+    </div>
+
+    <div class="bg-white main-news d-flex justify-content-center">
+      <div class="col-lg-5 col-md-7 col-11 detail-news-info">
+        <h4 class="news-header pt-3">{{ post.title }}</h4>
+        <div class="news-share me-3 d-md-block d-none">
+          <div class="row">
+            <button class="btn news-share-button">
+              <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" target="blank">
+                <img src="{% static 'icons/facebookIcon.svg' %}" class="w-100" alt="Share on Facebook">
+              </a>
+            </button>
+          </div>
+          <div class="row mt-2">
+            <button class="btn news-share-button">
+              <a href="https://www.instagram.com/" target="_blank">
+                <img src="{% static 'icons/instagramIcon.svg' %}" class="w-100" alt="Share on Instagram">
+              </a>
+            </button>
+          </div>
+        </div>
+        <div class="news-text">
+            <div class="news-content pt-2">
+                {{ post.abstract }}
+            </div>
+        </div>
+
+        {% if news_tags %}
+        <div class="d-flex align-items-center pt-3">
+            <p class="tags-news mt-3">Tags:</p>
+            {% for tag in news_tags %}
+            <button class="btn tags-button ms-2">{{ tag.name }}</button>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="outstanding_news">
+  <div class="container-fluid featured-news">
+    <div class="container box-header-featured-news">
+      <div class="row">
+        <div class="col-6 d-flex align-items-center">
+          <h5 class="header-featured-news mb-0">TIN TỨC LIÊN QUAN</h5>
+        </div>
+        <div class="col-6 d-flex justify-content-end pe-0">
+          <button class="btn d-flex align-items-center">
+            <span class="view-more-featured-news me-1">TẤT CẢ</span>
+            <span>
+              <img src="{% static 'icons/arrowRightYellow.svg' %}" alt="arrow-right-icon" class="">
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+      {% for post in related_news %}
+        {% include 'components/news_card.html' with post=post news_index=forloop.counter %}
+      {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

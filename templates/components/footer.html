@@ -1,0 +1,110 @@
+{% load static %}
+
+{% block footer %}
+{% if page_name != 'welcome_page' %}
+<div class="container py-5">
+    <div class="d-flex flex-wrap justify-content-center align-items-center gap-4 bg-dark text-white rounded-4 p-4 shadow-lg" style="backdrop-filter: blur(10px);">
+
+      <!-- ICON -->
+      <div class="flex-shrink-0 fs-1 text-warning">
+        <i class="bi bi-megaphone-fill"></i>
+      </div>
+
+      <!-- TEXT MÔ TẢ -->
+      <div class="flex-grow-1">
+        <h5 class="mb-1 fw-bold">NHẬN THÔNG BÁO</h5>
+        <p class="mb-0 text-light small">Đăng ký ngay để nhận những thông tin mới nhất của trường nhé!</p>
+      </div>
+
+      <!-- FORM -->
+      <form action="mailto:hunggpel@gmail.com" method="get" class="d-flex align-items-center gap-2 w-50 w-md-auto">
+        <form action="/register_email/" method="post" class="d-flex align-items-center gap-2 w-100 w-md-auto">
+            {% csrf_token %}
+            <input id="emailInput"
+                type="email"
+                name="email"
+                placeholder="Nhập địa chỉ email...."
+                class="form-control rounded-pill px-4 py-2 shadow-sm border-light"
+                style="min-width: 250px;" required>
+            <button type="submit" class="btn btn-warning rounded-circle p-2 d-flex align-items-center justify-content-center" style="width: 44px; height: 44px;">
+                <img src="/static/icons/arrowCrossYellow.svg" class="arrow-cross-icon w-100 h-100" alt="arrow-cross-icon">
+            </button>
+        </form>
+      </form>
+    </div>
+</div>
+{% endif %}
+<div class="container footer py-4 bg-white text-dark">
+    <div class="row">
+
+      <!-- Logo đối tác -->
+      <div class="col-md-3 col-12 d-flex justify-content-center align-items-center gap-3 mb-4 mb-md-0">
+        <a href="https://www.facebook.com/UET.VNUH" target="_blank">
+          <img src="{% static 'img/uet1_logo.jpg' %}" class="logo-footer" alt="logo-footer">
+        </a>
+        <a href="https://www.facebook.com/DTNHSV.UET.VNU" target="_blank">
+          <img src="{% static 'img/doan_logo.jpg' %}" class="logo-footer" alt="logo-footer">
+        </a>
+        <a href="https://www.facebook.com/DTNHSV.UET.VNU" target="_blank">
+          <img src="{% static 'img/hoi_logo.jpg' %}" class="logo-footer" alt="logo-footer">
+        </a>
+      </div>
+
+      <!-- Truy cập nhanh (chia 2 cột căn giữa) -->
+      <div class="col-md-4 col-sm-6 mt-2 list-footer">
+        <div class="text-center mb-3">
+          <h6 class="fw-bold mb-0">Truy cập nhanh</h6>
+        </div>
+        <div class="row text-center">
+          <!-- Cột trái -->
+          <div class="col-6">
+            <ul class="list-unstyled">
+              <li><a href="{% url 'home' %}" class="text-dark text-decoration-none d-block py-1 text-center">Trang chủ</a></li>
+              <li><a href="{% url 'connects' %}" class="text-dark text-decoration-none d-block py-1 text-center">Kết nối</a></li>
+              <li><a href="{% url 'documents' %}" class="text-dark text-decoration-none d-block py-1 text-center">Tài liệu</a></li>
+            </ul>
+          </div>
+          <!-- Cột phải -->
+          <div class="col-6">
+            <ul class="list-unstyled">
+              <li><a href="{% url 'forums' %}" class="text-dark text-decoration-none d-block py-1 text-center">Diễn đàn</a></li>
+              <li><a href="{% url 'news' %}" class="text-dark text-decoration-none d-block py-1 text-center">Tin tức</a></li>
+              <li><a href="{% url 'profile' %}" class="text-dark text-decoration-none d-block py-1 text-center">Hồ sơ</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Thông tin liên hệ -->
+      <div class="col-md-4 col-sm-6 mt-2 list-footer">
+        <div class="mb-3">
+          <h6 class="fw-bold mb-0">Liên hệ với chúng tôi</h6>
+        </div>
+        <ul class="list-unstyled">
+          <li class="contact-footer"><a href="mailto:doandaihoccongnghe@vnu.edu.vn" class="text-dark text-decoration-none">✉️ doandaihoccongnghe@vnu.edu.vn</a></li>
+          <li class="contact-footer"><a href="tel:02437547528" class="text-dark text-decoration-none">📞 024.3754.7528</a></li>
+          <li class="contact-footer"><a href="https://maps.app.goo.gl/fnqPHm3FuQNfp3Qh8"  target="_blank" class="text-dark text-decoration-none">📍Nhà G3, 144 Xuân Thủy, Cầu Giấy, Hà Nội</a></li>
+        </ul>
+      </div>
+
+      <!-- Icon liên kết -->
+      <div class="col-md-1 col-sm-12 d-flex flex-column align-items-center justify-content-center mt-3 mt-md-0">
+        <a href="https://www.facebook.com/UET.VNUH" target="_blank" class="mb-2">
+          <img src="{% static 'icons/facebookIcon.svg' %}" alt="facebook-icon">
+        </a>
+        <a href="https://uet.vnu.edu.vn/" target="_blank">
+          <img src="{% static 'icons/linkIcon.svg' %}" class="link-icon" alt="link-icon">
+        </a>
+      </div>
+
+    </div>
+
+    <!-- Bản quyền -->
+    <div class="row mt-4">
+      <div class="col-12 text-center text-muted small">
+        © 2025 Trường Đại học Công nghệ - Đại học Quốc gia Hà Nội. All rights reserved.
+      </div>
+    </div>
+  </div>
+
+{% endblock footer %}

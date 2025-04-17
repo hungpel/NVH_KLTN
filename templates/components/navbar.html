@@ -1,0 +1,87 @@
+{% load static %}
+
+<div class="container mt-5 pt-5">
+    {% if page_name != 'welcome_page' %}
+    <nav class="navbar navbar-expand-lg navbar-dark bg-gradient-animated shadow-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'home' %}">
+                <img src="{% static 'img/uet1_logo.jpg' %}" alt="Logo UET" height="50" class="d-inline-block align-top">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavCentered" aria-controls="navbarNavCentered" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNavCentered">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item {% if '/home/' in request.path %}active-item{% endif %}">
+                        <a class="nav-link {% if '/home/' in request.path %}active-animated-improved{% endif %}" href="{% url 'home' %}">
+                            <img src="{% static 'icons/homeIcon.svg' %}" alt="Trang chủ" height="20" class="me-2 filter-white">
+                            Trang chủ
+                        </a>
+                    </li>
+                    <li class="nav-item {% if '/connects/' in request.path %}active-item{% endif %}">
+                        <a class="nav-link {% if '/connects/' in request.path %}active-animated-improved{% endif %}" href="{% url 'connects' %}">
+                            <img src="{% static 'icons/coupleFriendsIcon.svg' %}" alt="Kết nối" height="20" class="me-2 filter-white">
+                            Kết nối
+                        </a>
+                    </li>
+                    <li class="nav-item {% if '/documents/' in request.path %}active-item{% endif %}">
+                        <a class="nav-link {% if '/documents/' in request.path %}active-animated-improved{% endif %}" href="{% url 'documents-list' %}">
+                            <img src="{% static 'icons/documentIcon.svg' %}" alt="Tài liệu" height="20" class="me-2 filter-white">
+                            Tài liệu
+                        </a>
+                    </li>
+                    <li class="nav-item {% if '/forums/' in request.path %}active-item{% endif %}">
+                        <a class="nav-link {% if '/forums/' in request.path %}active-animated-improved{% endif %}" href="{% url 'forums-list' %}">
+                            <img src="{% static 'icons/forumIcon.svg' %}" alt="Diễn đàn" height="20" class="me-2 filter-white forum-logo">
+                            Diễn đàn
+                        </a>
+                    </li>
+                    <li class="nav-item {% if '/news/' in request.path %}active-item{% endif %}">
+                        <a class="nav-link {% if '/news/' in request.path %}active-animated-improved{% endif %}" href="{% url 'news' %}">
+                            <img src="{% static 'icons/newsIcon.svg' %}" alt="Tin tức" height="20" class="me-2 filter-white">
+                            Tin tức
+                        </a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item profile-nav-item {% if '/profile/' in request.path %}active-item{% endif %}">
+                        <a class="nav-link {% if '/profile/' in request.path %}active-animated-improved{% endif %}" href="{% url 'profile' %}">
+                            <img src="{% static 'icons/personIcon.svg' %}" alt="Hồ sơ" height="20" class="me-2 filter-white">
+                            Hồ sơ
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    {% else %}
+    <nav class="navbar navbar-expand-lg navbar-dark bg-gradient-animated shadow-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'home' %}">
+                <img src="{% static 'img/uet1_logo.jpg' %}" alt="Logo UET" height="50" class="d-inline-block align-top">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavCentered" aria-controls="navbarNavCentered" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNavCentered">
+                <ul class="navbar-nav ms-auto">
+                    <li style="width: 200px;" class="nav-item profile-nav-item {% if '/profile/' in request.path %}active-item{% endif %}">
+                        <a class="nav-link {% if '/profile/' in request.path %}active-animated-improved{% endif %}" href="{% url 'login' %}">
+                            <img src="{% static 'icons/personIcon.svg' %}" alt="Hồ sơ" height="20" class="me-2 filter-white">
+                            Đăng nhập
+                        </a>
+                    </li>
+                    <li style="width: 200px;" class="nav-item profile-nav-item {% if '/profile/' in request.path %}active-item{% endif %}">
+                        <a class="nav-link {% if '/profile/' in request.path %}active-animated-improved{% endif %}" href="{% url 'register' %}">
+                            <img src="{% static 'icons/personIcon.svg' %}" alt="Hồ sơ" height="20" class="me-2 filter-white">
+                            Đăng ký
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    {% endif %}
+</div>

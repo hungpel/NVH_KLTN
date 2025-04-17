@@ -1,0 +1,25 @@
+.gradient-custom-2 {
+    background: linear-gradient(135deg,
+        #abd6da 0%,   /* Cyan blue */
+        #3b82f6 25%,  /* Blue-500 */
+        #8e90f6 50%,  /* Indigo-500 */
+        #1d4ed8 75%,  /* Blue-700 */
+        #6e7ce6 100%  /* Cyan blue */
+    );
+    background-size: 300% 300%;
+    animation: gradientAnimationImproved 8s ease-in-out infinite;
+    }
+
+
+
+    @media (min-width: 768px) {
+    .gradient-form {
+    height: 100vh !important;
+    }
+    }
+    @media (min-width: 769px) {
+    .gradient-custom-2 {
+    border-top-right-radius: .3rem;
+    border-bottom-right-radius: .3rem;
+    }
+}

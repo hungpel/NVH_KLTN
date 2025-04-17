@@ -1,0 +1,43 @@
+{% load static %}
+
+<head>
+    <link rel="stylesheet" href="{% static 'css/pagination.css' %}">
+</head>
+
+<div class="container">
+    <div class="row pt-4">
+        <div class="col d-flex justify-content-center">
+            <div id="navPage">
+                <div class="container">
+                    <div class="row d-flex justify-content-center">
+                        <div class="col">
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination">
+                                    {% if paginator_data.has_previous %}
+                                    <li class="page-item">
+                                        <a class="page-link" href="?page={{ paginator_data.previous_page_number }}" aria-label="Previous">
+                                            <span aria-hidden="true">&laquo;</span>
+                                        </a>
+                                    </li>
+                                    {% endif %}
+                                    {% for page in paginator_data.paginator.page_range %}
+                                    <li class="page-item {% if page == paginator_data.number %}active{% endif %}">
+                                        <a class="page-link" href="?page={{ page }}">{{ page }}</a>
+                                    </li>
+                                    {% endfor %}
+                                    {% if paginator_data.has_next %}
+                                    <li class="page-item">
+                                        <a class="page-link" href="?page={{ paginator_data.next_page_number }}" aria-label="Next">
+                                            <span aria-hidden="true">&raquo;</span>
+                                        </a>
+                                    </li>
+                                    {% endif %}
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

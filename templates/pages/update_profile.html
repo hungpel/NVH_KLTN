@@ -1,0 +1,97 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="pt-4 pb-4">
+        <div class="col page-adress d-flex align-items-center justify-content-center">
+          <a href="{% url 'home' %}">
+            <p class="mb-0">TRANG CHỦ</p>
+          </a>
+          <span class="d-flex align-items-center"><img src="{% static 'icons/arrowRightBlack.svg' %}" class="w-100" alt="arrow"></span>
+          <a href="{% url 'profile' %}">
+            <p class="mb-0">HỒ SƠ</p>
+          </a>
+          <span class="d-flex align-items-center"><img src="{% static 'icons/arrowRightBlack.svg' %}" class="w-100" alt="arrow"></span>
+          <p class="current-page">CẬP NHẬT HỒ SƠ</p>
+        </div>
+    </div>
+
+    <form method="post" action="{% url 'profile-update' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% if messages %}
+            <div class="alert alert-success">
+                {% for message in messages %}
+                <strong>Success!</strong> {{ message }}
+                {% endfor %}
+            </div>
+        {% endif %}
+        <div class="row">
+            <div class="col-xl-4">
+                <div class="card mb-4 mb-xl-0">
+                    <div class="card-header">Ảnh hồ sơ</div>
+                    <div class="card-body text-center">
+                        <img class="img-account-profile rounded-circle mb-2" width="150" height="150" style="object-fit: cover;" src="{{ object.avatar.url }}" alt="avt-img">
+                        <div class="small font-italic text-muted mb-4">JPG hoặc PNG không quá 5 MB</div>
+                        <input class="btn" type="file" name='avatar'/>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-8">
+                <div class="card mb-4">
+                    <div class="card-header">Chỉnh sửa hồ sơ</div>
+                    <div class="card-body">
+                            <div class="row gx-3 mb-3">
+                                <div class="col">
+                                    <label class="small mb-1" for="inputFullName">Họ</label>
+                                    <input class="form-control" id="inputFullName" name="first_name"　type="text" placeholder="Nhập tên của bạn" value="{{ object.user.first_name }}">
+                                </div>
+                                <div class="col">
+                                    <label class="small mb-1" for="inputFullName">Tên<nav></nav></label>
+                                    <input class="form-control" id="inputFullName" name="last_name"　type="text" placeholder="Nhập tên của bạn" value="{{ object.user.last_name }}">
+                                </div>
+                            </div>
+                            <div class="row gx-3 mb-3">
+                                <div class="col-md-6">
+                                    <label class="small mb-1" for="studentId">Mã số sinh viên</label>
+                                    <input class="form-control" id="studentId" type="text" name="code" placeholder="Nhập mã số sinh viên" value="{{ object.code }}">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="small mb-1" for="studentClass">Lớp</label>
+                                    <input class="form-control" id="studentClass" type="text" name="classroom" placeholder="Nhập lớp khóa học" value="{{ object.classroom }}">
+                                </div>
+                            </div>
+                            <div class="row gx-3 mb-3">
+                                <div class="col-md-6">
+                                    <label class="small mb-1" for="studentEmail">Email</label>
+                                    <input class="form-control" id="studentEmail" type="email" name="email" placeholder="Nhập email" value="{{ object.user.email }}">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="small mb-1" for="studentClass">Số điện thoại</label>
+                                    <input class="form-control" id="studentClass" type="text" name="phone" placeholder="Nhập số điện thoại" value="{{ object.phone }}">
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="small mb-1" for="studentAddress">Địa chỉ</label>
+                                <input class="form-control" id="studentAddress" type="text" name="address" placeholder="Nhập địa chỉ" value="{{ object.address }}">
+                            </div>
+                            {% comment %} <div class="mb-3">
+                                <label class="small mb-1" for="studentFacebook">Link Facebook</label>
+                                <input class="form-control" id="studentFacebook" placeholder="Nhập link facebook" value="{{ object.fb_link }}">
+                            </div>
+                            <div class="mb-3">
+                                <label class="small mb-1" for="studentGithub">Link Github</label>
+                                <input class="form-control" id="studentGithub" placeholder="Nhập link github" value="{{ object.github_link }}">
+                            </div>
+                            <div class="mb-3">
+                                <label class="small mb-1" for="studentInstagram">Link Instagram</label>
+                                <input class="form-control" id="studentInstagram" placeholder="Nhập link instagram" value="{{ object.instagram_link }}">
+                            </div> {% endcomment %}
+                            <button class="btn btn-primary" type="submit">Lưu thay đổi</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock content %}

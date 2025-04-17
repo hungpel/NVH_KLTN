@@ -1,0 +1,108 @@
+{% extends 'layouts/base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<style>
+.modal-body .btn {
+  transition: all 0.2s ease-in-out;
+}
+.modal-body .btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+</style>
+
+<div class="container">
+    <img src="{% static 'img/banner_document.png' %}" class="banner-document img-fluid" width="100%" alt="banner">
+</div>
+
+<div id="forum-filter">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 d-flex my-3">
+                <a data-bs-toggle="modal" data-bs-target="#subject-filter">
+                    <button class="btn btn-outline-primary me-3 filter-content">Môn học</button>
+                </a>
+                <a href="{% url 'document-create' %}">
+                    <button class="btn btn-outline-primary filter-content">Đóng góp tài liệu</button>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="subject-filter" tabindex="-1" aria-labelledby="subjectFilterLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content shadow-lg rounded-4 border-0">
+
+      <!-- Modal Header -->
+      <div class="modal-header bg-primary text-white rounded-top-4">
+        <h5 class="modal-title" id="subjectFilterLabel">Chọn môn học</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="modal-body">
+        <div class="row g-3">
+          <!-- Nút 'Tất cả' -->
+          <div class="col-6 col-md-4 col-lg-3">
+            <a href="{% url 'documents' %}" class="w-100 d-block">
+              <button class="btn w-100 py-2 rounded-pill fw-semibold
+                {% if not request.GET.subject %}
+                  btn-primary text-white
+                {% else %}
+                  btn-outline-primary
+                {% endif %}
+              ">
+                Tất cả
+              </button>
+            </a>
+          </div>
+
+          <!-- Các nút môn học -->
+          {% for subject in subjects %}
+            <div class="col-6 col-md-4 col-lg-3">
+              <a href="?subject={{ subject.pk }}" class="w-100 d-block">
+                <button class="btn w-100 py-2 rounded-pill fw-semibold
+                  {% if subject.pk|stringformat:'s' == request.GET.subject %}
+                    btn-primary text-white
+                  {% else %}
+                    btn-outline-secondary
+                  {% endif %}
+                ">
+                  {{ subject.name }}
+                </button>
+              </a>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="modal-footer justify-content-end bg-light rounded-bottom-4">
+        <button class="btn btn-success px-4 py-2 rounded-pill fw-semibold">
+          <i class="bi bi-check-circle me-2"></i>Lưu
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<div id="forum-content">
+    <div class="container mb-4">
+        {% for document in object_list %}
+        <div class="row document-box py-4 {% if forloop.counter|divisibleby:2 %}bg-item-document{% endif %}">
+            <div class="col-12">
+                {% include 'components/document_box.html' with is_home_page=False document=document%}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% include 'components/pagination.html' with paginator_data=page_obj %}
+{% endblock content %}

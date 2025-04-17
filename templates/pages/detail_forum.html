@@ -1,0 +1,238 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block content %}
+<div id="detail-post-body" class="container-fluid py-4">
+    <div class="pb-4">
+        <div class="col page-adress d-flex align-items-center justify-content-center">
+        <a href="{% url 'home' %}">
+            <p class="mb-0">TRANG CHỦ</p>
+        </a>
+        <span class="d-flex align-items-center"><img src="{% static 'icons/arrowRightBlack.svg' %}" class="w-100" alt="arrow"></span>
+        <a href="{% url 'forums-list' %}">
+            <p class="mb-0">DIỄN ĐÀN</p>
+        </a>
+        <span class="d-flex align-items-center"><img src="{% static 'icons/arrowRightBlack.svg' %}" class="w-100" alt="arrow"></span>
+        <p class="current-page">CHI TIẾT BÀI ĐĂNG</p>
+        </div>
+    </div>
+
+    <div class="container detail-post-content">
+        <div class="row py-4 post-user-info">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-9 col-sm-8 col-12">
+                <img src="{{ request.user.student.avatar.url }}" class="rounded-circle me-2" height="40px">
+                {{ request.user.username }}
+            </div>
+            <div class="col-lg-2 col-sm-4 col-12 ms-sm-0 ms-5 d-flex align-items-center">
+                <img src="{% static 'icons/clockIcon.svg' %}" class="me-3" alt="Clock-Icon">
+                {{ object.created_at|date:"d/m/Y" }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-11 col-12 post-forum-title">
+                {{ object.name }}
+            </div>
+        </div>
+        <div class="row mt-2 post-forum-text">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-11 col-12 pb-4 d-flex category-and-tags-box">
+                {% if object.category %}<button class="btn px-2 py-1 me-2 text-white bg-primary">{{ object.category }}</button>{% endif %}
+            </div>
+        </div>
+        <div class="row mt-2 post-forum-text">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-11 col-12 pb-4">
+                {{ object.description }}
+            </div>
+        </div>
+        <div class="row mt-2 post-forum-text">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-6 col-12 pb-4 d-flex">
+                <button id="like-forum-button" class="btn px-2 py-1 me-2 {% if not is_like %} btn-outline-primary {% else %} btn-primary {% endif %} d-flex align-items-center ">
+                    <img src="{% static 'icons/likeIcon.svg' %}" class="me-1" alt="like-Icon">
+                    <a id="like-forum-count">{{ like_count}}</a>
+                </button>
+                <div class="dropdown">
+                    <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="{% static 'icons/shareIcon.svg' %}" class="me-1" alt="share-Icon">
+                        Chia sẻ
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <a class="dropdown-item d-flex align-items-center" "https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" target="_blank">
+                            <li class="ps-1 m-0">
+                                <img src="{% static 'icons/facebookIconProfile.svg' %}" alt="facebook-icon" class="me-2">
+                                Facebook
+                            </li>
+                        </a>
+                        <a class="dropdown-item d-flex align-items-center" href="#">
+                            <li class="ps-1 m-0">
+                                <img src="{% static 'icons/linkIcon.svg' %}" alt="facebook-icon" class="me-2">
+                                Sao chép liên kết
+                            </li>
+                        </a>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="all-forum-comments">
+        {% for comment in comments %}
+        <div class="container mt-4 pb-3 detail-post-content">
+            <div class="row py-4 post-user-info">
+                <div class="col-lg-1"></div>
+                <div class="col-lg-9 col-sm-8 col-12">
+                    <img src="{{ comment.owner.user.student.avatar.url }}" class="rounded-circle me-2" height="40px">
+                    {{ comment.owner.user }}
+                </div>
+                <div class="col-lg-2 col-sm-4 col-12 ms-sm-0 d-none d-sm-flex align-items-center">
+                    <img src="{% static 'icons/clockIcon.svg' %}" class="me-3" alt="Clock-Icon">
+                    {{ comment.created_at|date:"d/m/Y" }}
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-sm-1"></div>
+                <div class="col-sm-11 col-12 post-forum-text">
+                    {{ comment.text }}
+                </div>
+            </div>
+            <div class="row post-forum-text d-block d-sm-none">
+                <div class="col-sm-1"></div>
+                <div class="col-sm-11 col-12 d-flex align-items-center">
+                    <img src="{% static 'icons/clockIcon.svg' %}" class="me-3" alt="Clock-Icon">
+                    {{ comment.created_at|date:"d/m/Y" }}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="container mt-4">
+        <div class="row py-4 post-user-info">
+            <div class="col-12 d-flex justify-content-center align-items-start">
+                <img src="{{ request.user.student.avatar.url }}" class="rounded-circle me-2" height="40px">
+                <textarea rows="10" cols="100%" placeholder='Viết câu trả lời của bạn...' id="text-forum-comment" class="reply-input p-3"></textarea>
+            </div>
+            <input id="input_image" value="{{request.user.student.avatar.url}}" hidden />
+            <input id="input_username" value="{{request.user.username}}" hidden />
+            <div class="col-12 d-flex justify-content-end">
+                <button id="button-forum-comment" class="btn me-4 my-3 btn-outline-primary d-flex align-items-center">
+                    Trả lời
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let text = document.getElementById("text-forum-comment");
+    let buttonComment = document.getElementById("button-forum-comment");
+
+    function createComment(image, username, text, createdAt) {
+        let contentHTML = `    <div class="container mt-4 pb-3 detail-post-content">
+        <div class="row py-4 post-user-info">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-9 col-sm-8 col-12">
+                <img src=${image} class="rounded-circle me-2" height="40px">
+                ${username}
+            </div>
+            <div class="col-lg-2 col-sm-4 col-12 ms-sm-0 d-none d-sm-flex align-items-center">
+                <img src="{% static 'icons/clockIcon.svg' %}" class="me-3" alt="Clock-Icon">
+                ${createdAt}
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-11 col-12 post-forum-text">
+                ${text}
+            </div>
+        </div>
+        <div class="row post-forum-text d-block d-sm-none">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-11 col-12 d-flex align-items-center">
+                <img src="{% static 'icons/clockIcon.svg' %}" class="me-3" alt="Clock-Icon">
+                ${createdAt}
+            </div>
+        </div>
+    </div>`
+    return contentHTML
+    }
+
+    buttonComment.addEventListener("click", (e) => {
+        if (text.value) {
+            sendHTTP(text.value)
+        }
+    })
+
+    function sendHTTP(text) {
+        let currentForum = JSON.parse("{{forum.pk|escapejs}}");
+        let username = document.getElementById("input_username").value
+        let image = document.getElementById("input_image").value
+
+        let data = new FormData();
+        data.append('content_type', 'Forum');
+        data.append('object_id', currentForum);
+        data.append('text', text)
+
+        let xhr = new XMLHttpRequest();
+        xhr.open('POST', '/api/comment/', true);
+        xhr.onload = function () {
+            if (xhr.status == 201) {
+                let currentDate = new Date(Date.now());
+                let day = currentDate.getDate();
+                let month = currentDate.getMonth() + 1;
+                let year = currentDate.getFullYear();
+                if (day < 10) {
+                    day = '0' + day;
+                }
+                if (month < 10) {
+                    month = '0' + month;
+                }
+                let formattedDate = day + '/' + month + '/' + year;
+                let newCommentHTML = createComment(image, username, text, formattedDate);
+                let newCommentElement = document.createElement('div');
+                newCommentElement.innerHTML = newCommentHTML;
+                document.getElementById("all-forum-comments").appendChild(newCommentElement);
+            }
+
+        };
+        xhr.send(data);
+    }
+
+    likeForumButton = document.getElementById("like-forum-button")
+    likeForumCount = document.getElementById("like-forum-count")
+
+    likeForumButton.addEventListener("click", (e) => {
+        let currentForum = JSON.parse("{{forum.pk|escapejs}}");
+
+        let data = new FormData();
+        data.append('content_type', 'Forum');
+        data.append('object_id', currentForum);
+
+        let xhr = new XMLHttpRequest();
+        xhr.open('POST', '/api/like/', true);
+        xhr.onload = function () {
+            if (xhr.status == 201) {
+                res = JSON.parse(xhr.response)
+                if (res.type == "like") {
+                    count = likeForumCount.text
+                    likeForumButton.classList.remove("btn-outline-primary")
+                    likeForumButton.classList.add("btn-primary")
+                    likeForumCount.innerHTML = count * 1 + 1
+                } else {
+                    count = likeForumCount.text
+
+                    likeForumButton.classList.remove("btn-primary")
+                    likeForumButton.classList.add("btn-outline-primary")
+                    likeForumCount.innerHTML = count * 1 - 1
+                }
+            }
+
+        };
+        xhr.send(data);
+    })
+
+</script>
+{% endblock content %}

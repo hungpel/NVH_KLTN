@@ -1,0 +1,23 @@
+.title {
+    font-family: "Big Shoulders Display";
+    font-size: 3rem;
+    font-weight: 500;
+}
+
+.label {
+    font-family: "Big Shoulders Display";
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.input--style-4, .radio-container {
+    font-family: "Work Sans", sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+.register-btn {
+    font-family: "Manrope";
+    font-size: 1rem;
+    font-weight: 400;
+}

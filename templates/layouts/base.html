@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    {% block essential_css %}
+      {% include "includes/css.html" %}
+    {% endblock essential_css %}
+
+    {% block extra_css %}{% endblock extra_css %}
+    <title>UniConnect – Kết nối và phát triển cộng đồng sinh viên</title>
+  </head>
+
+  <body>
+    <div id="navbar">
+      {% include "components/navbar.html"%}
+    </div>
+
+    {% block content %}
+    <div class="container">
+        {% block main_content %}
+        {% endblock main_content %}
+    </div>
+    {% endblock content %}
+
+    <div id="spinner"></div>
+
+    <div id="footer">
+      {% include "components/footer.html"%}
+    </div>
+
+    {% block essential_js %}
+        {% include "includes/js.html" %}
+    {% endblock essential_js %}
+
+    {% block extra_js %}{% endblock extra_js %}
+  </body>
+</html>
