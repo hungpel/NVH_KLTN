@@ -2,79 +2,168 @@
 {% load static %}
 
 {% block content %}
-<div class="container">
-    <img src="{% static 'img/banner_forum.png' %}" class="banner-forum img-fluid" width="100%" alt="banner">
-</div>
+<style>
+    /* Các style chung và modal (giữ nguyên từ lần trước) */
+    .modal-body .btn {
+        transition: all 0.2s ease-in-out;
+    }
+    .modal-body .btn:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
 
-<div id="forum-filter">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6 d-flex my-3">
-                <a data-bs-toggle="modal" data-bs-target="#category-filter">
-                    <button class="btn btn-outline-primary me-3 filter-content">Danh mục</button>
-                </a>
-                <a href="{% url 'forum-create' %}">
-                    <button class="btn btn-outline-primary filter-content">Thêm thảo luận</button>
-                </a>
-            </div>
+    /* Стиль cho bố cục đặc sắc trực tiếp */
+    .forum-item {
+        background-color: var(--forum-card-bg);
+        border-radius: 1rem;
+        box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.08);
+        overflow: hidden;
+        transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        border: 1px solid var(--card-border-color);
+        display: flex;
+        flex-direction: row;
+        align-items: stretch;
+        margin-bottom: 1.5rem; /* Khoảng cách giữa các forum item */
+    }
+
+    .forum-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.12);
+    }
+
+    .forum-avatar-col {
+        flex: 0 0 80px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 1rem;
+        background-color: rgba(var(--bs-primary-rgb), 0.05);
+    }
+
+    .forum-avatar {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        object-fit: cover;
+        box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.1);
+    }
+
+    .forum-content {
+        flex-grow: 1;
+        padding: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .forum-title {
+        font-size: 1.1rem;
+        font-weight: bold;
+        color: var(--text-primary);
+        margin-bottom: 0.5rem;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        min-height: 2.4rem;
+    }
+
+    .forum-footer {
+        display: flex;
+        align-items: center;
+        padding: 1rem 1.5rem;
+        border-top: 1px solid var(--card-border-color);
+        background-color: white;
+        border-left: 1px solid var(--card-border-color);
+    }
+
+    .category-tag {
+        background-color: var(--primary-tone);
+        color: var(--text-primary);
+        border-radius: 0.5rem;
+        padding: 0.3rem 0.6rem;
+        font-size: 0.8rem;
+        font-weight: bold;
+        margin-right: 1rem;
+    }
+
+    .forum-stats {
+        font-size: 0.85rem;
+        color: var(--text-secondary);
+    }
+
+    .forum-stats i {
+        margin-right: 0.3rem;
+    }
+</style>
+
+<div id="forum-filter" class="bg-light py-4 mb-5">
+    <div class="container d-flex justify-content-between align-items-center">
+        <div>
+            <button data-bs-toggle="modal" data-bs-target="#category-filter" class="btn btn-outline-primary me-3 filter-content rounded-pill shadow-sm">
+                <i class="bi bi-funnel-fill me-2"></i> Lọc theo danh mục
+            </button>
+            <a href="{% url 'forum-create' %}" class="btn btn-primary filter-content rounded-pill shadow-sm">
+                <i class="bi bi-plus-circle me-2"></i> Tạo thảo luận mới
+            </a>
         </div>
+        <span class="text-muted small"><i class="bi bi-chat-dots me-1"></i> {{ object_list|length }} thảo luận</span>
     </div>
 </div>
 
-<div class="modal modal-fluid modal-vertical fade" id="category-filter" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog ">
-        <div class="modal-content">
-            <div class="modal-header bg-primary">
-                <h3 class="modal-header-text text-white mt-2">Danh mục</h3>
-                <button type="button" class="btn-close btn-close-modal" data-bs-dismiss="modal" aria-label="Close"></button>
+<div class="modal modal-fluid modal-vertical fade" id="category-filter" tabindex="-1" aria-labelledby="categoryFilterLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content shadow-lg rounded-0 border-0">
+            <div class="modal-header text-white">
+                <h5 class="modal-title" id="categoryFilterLabel"><i class="bi bi-funnel-fill me-2"></i> Chọn danh mục</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body modal-content-text">
+            <div class="modal-body">
                 {% for category in categories %}
-                <a href="?category={{ category.pk }}">
-                <button class="mt-2 btn px-2 py-1 text-white {% if category.selected %}selected-filter-items{% endif %}" style="{% if not category.selected %}background-color: #777da7;{% endif %}">{{ category.name }}</button>
+                <a href="?category={{ category.pk }}" class="d-block mb-2">
+                    <button class="btn btn-lg w-100 rounded-pill fw-semibold {% if category.selected %}btn-primary text-white{% else %}btn-outline-secondary{% endif %}">
+                        {{ category.name }}
+                    </button>
                 </a>
                 {% endfor %}
+                <a href="{% url 'forums' %}" class="d-block mt-3">
+                    <button class="btn btn-lg w-100 rounded-pill fw-semibold {% if not request.GET.category %}btn-primary text-white{% else %}btn-outline-secondary{% endif %}">
+                        Tất cả danh mục
+                    </button>
+                </a>
             </div>
-            <div class="modal-footer modal-content-text d-flex justify-content-end">
-                <button class="btn btn-outline-primary me-3"><strong>Lưu</strong></button>
+            <div class="modal-footer bg-light">
+                <button type="button" class="btn btn-secondary rounded-pill fw-semibold" data-bs-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary rounded-pill fw-semibold">Áp dụng</button>
             </div>
         </div>
     </div>
 </div>
 
-<div id="forum-content">
-    <div class="container mb-4">
-        <div class="row header-table pb-3 border-bottom-1 px-3">
-            <div class="col-md-6 col-12 d-flex justify-content-start">Nội dung</div>
-            <div class="col-md-2 d-none d-md-flex justify-content-center">Danh mục</div>
-            <div class="col-md-1 d-none d-md-flex justify-content-center">Lượt thích</div>
-            <div class="col-md-1 d-none d-md-flex justify-content-center">Phản hồi</div>
-            <div class="col-md-2 d-none d-md-flex justify-content-center">Ngày đăng</div>
-        </div>
+<div id="forum-content" class="py-5">
+    <div class="container">
         {% for forum in object_list %}
-        <a href="{% url 'forum-detail' pk=forum.pk %}">
-            <div class="row content-table py-4 px-3 {% if forloop.counter|divisibleby:2 %}bg-post-forum{% endif %}">
-                <div class="col-md-6">
-                    <div class="row">
-                        <div class="col-2 d-flex justify-content-center align-items-center">
-                            <img src="{{ forum.owner.avatar.url }}" class="rounded-circle" height="40px">
-                        </div>
-                        <div class="col-10 post-sub-title d-flex justify-content-center align-items-center">
-                            <div class="row">
-                                <div>{{ forum.description }}</div>
-                            </div>
-                        </div>
+        <div class="forum-item">
+            <div class="forum-avatar-col">
+                <a href="#">
+                    <img src="{{ forum.owner.avatar.url }}" alt="{{ forum.owner.user.username }}" class="forum-avatar">
+                </a>
+            </div>
+            <div class="forum-content">
+                <a href="{% url 'forum-detail' pk=forum.pk %}" style="text-decoration: none; color: inherit;">
+                    <h6 class="forum-title">{{ forum.description }}</h6>
+                </a>
+                <div class="forum-footer">
+                    {% if forum.category %}
+                    <span class="category-tag">{{ forum.category }}</span>
+                    {% endif %}
+                    <div class="forum-stats">
+                        <i class="bi bi-heart me-1"></i> {{ forum.like_count }}
+                        <i class="bi bi-chat-dots me-1"></i> {{ forum.comment_count }}
                     </div>
                 </div>
-                <div class="col-md-2 d-none d-md-flex justify-content-center align-items-center">
-                    {% comment %} TODO: add category and color {% endcomment %}
-                    {% if forum.category %} <button class="btn px-2 py-1 text-white" style="background-color: #777da7;">{{ forum.category }} </button>{% endif %}
-                </div>
-                <div class="col-md-1 d-none d-md-flex likes-number justify-content-center align-items-center">{{ forum.like_count }}</div>
-                <div class="col-md-1 d-none d-md-flex replies-number justify-content-center align-items-center"><strong>{{ forum.comment_count }}</strong></div>
-                <div class="col-md-2 d-none d-md-flex date-info justify-content-center align-items-center">{{ forum.created_at|date:"d/m/Y" }}</div>
             </div>
-        </a>
+        </div>
         {% endfor %}
     </div>
 </div>
