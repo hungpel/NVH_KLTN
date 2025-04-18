@@ -1,38 +1,79 @@
-#detail-post-body {
-    background-color: #f8f9fb;
+.breadcrumb {
+    background-color: transparent;
+    padding: 0;
+    margin-bottom: 1.5rem;
 }
 
-.detail-post-content, .request-box {
-    background-color: white;
-    border-radius: 10px;
+
+.breadcrumb-item a {
+    color: var(--primary-tone);
+    text-decoration: none;
 }
 
-.post-user-info {
-    font-family: var(--font-text-content);
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.188rem;
+.breadcrumb-item.active {
+    color: var(--text-primary);
+    font-weight: bold;
 }
 
-.post-forum-title {
-    font-family: var(--font-text-header);
-    font-size: 2rem;
-    font-weight: 500;
-    line-height: 2.2rem;
+/* Стиль header bài đăng */
+.detail-post-header {
+    background-color: #fff !important;
+    border: 1px solid var(--border-color);
 }
 
-.post-forum-text {
-    font-family: var(--font-text-content);
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.3rem;
+.post-title {
+    color: var(--text-primary);
+    margin-bottom: 1rem;
 }
 
-.category-and-tags-box {
-    border-bottom: 1px solid lightgray;
+.user-info h6 {
+    margin-bottom: 0.1rem;
 }
 
-.reply-input {
-    border-radius: 10px;
-    border: 0.5px solid lightgray;
+/* Стиль nội dung bài đăng */
+.detail-post-content {
+    background-color: #fff !important;
+    border: 1px solid var(--border-color);
+}
+
+.post-description {
+    line-height: 1.7;
+    color: var(--text-secondary);
+}
+
+/* Стиль bình luận */
+#all-forum-comments h3 {
+    color: var(--text-primary);
+    margin-bottom: 1.5rem;
+}
+
+.comment-item {
+    background-color: var(--bg-light) !important;
+    border: 1px solid var(--border-color);
+}
+
+.comment-body p {
+    color: var(--text-secondary);
+    margin-bottom: 0;
+}
+
+/* Стиль khu vực trả lời */
+.reply-section h3 {
+    color: var(--text-primary);
+    margin-bottom: 1.5rem;
+}
+
+.reply-section textarea {
+    border-color: var(--border-color);
+    border-radius: 0.5rem;
+}
+
+.reply-section .btn-primary {
+    background-color: var(--bs-primary);
+    border-color: var(--bs-primary);
+}
+
+.reply-section .btn-primary:hover {
+    background-color: #0b5ed7;
+    border-color: #0a58ca;
 }
