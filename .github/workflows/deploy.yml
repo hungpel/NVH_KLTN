@@ -1,4 +1,4 @@
-name: Parrot AI CD Staging
+name: Uniconnect Deployment
 
 on:
   pull_request:
@@ -9,7 +9,7 @@ on:
       - 'main'
 
 jobs:
-  deploy-staging:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
