@@ -2,7 +2,65 @@
 {% load static %}
 
 {% block content %}
-<div id="slider">
-    {% include "components/slider.html"%}
-</div>
+
+<!-- Hero Section -->
+<section class="hero-section py-4">
+    <div class="hero-wrapper rounded-4 shadow-sm">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-md-6 hero-text">
+            <h1 class="display-5 fw-bold text-gradient">UNICONNECT</h1>
+            <p class="lead"> Bạn muốn tìm kiếm những người bạn cùng chung đam mê, cập nhật lịch trình các câu lạc bộ, hay đơn giản là cần một nơi để chia sẻ những khó khăn trong học tập? Hãy tới với UNICONNECT!</p>
+            <a href="{% url 'login' %}" class="btn btn-primary btn-lg mt-3 shadow-lg">Tham gia ngay</a>
+          </div>
+          <div class="col-md-6">
+            <img src="{% static 'img/uet1_logo.jpg' %}" class="hero-image" alt="Student Collaboration">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  
+<!-- Features Section -->
+<section id="features" class="features-section py-5">
+    <div class="container">
+        <h2 class="text-center fw-bold mb-4 section-title">Tính năng nổi bật</h2>
+
+        <div class="row g-4 mb-4">
+        <div class="col-md-6">
+            <div class="card feature-card h-100 text-center p-4">
+            <i class="bi bi-book fs-1 text-primary mb-3"></i>
+            <h5 class="fw-bold">Chia sẻ tài liệu</h5>
+            <p class="text-muted">Tải lên và tìm kiếm tài liệu học tập từ nhiều môn học khác nhau.</p>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card feature-card h-100 text-center p-4">
+            <i class="bi bi-chat-dots fs-1 text-success mb-3"></i>
+            <h5 class="fw-bold">Thảo luận</h5>
+            <p class="text-muted">Tham gia diễn đàn để hỏi đáp, giải quyết thắc mắc và mở rộng kiến thức cũng như những câu chuyện trong quá trình học tập.</p>
+            </div>
+        </div>
+        </div>
+
+        <div class="row g-4">
+        <div class="col-md-6">
+            <div class="card feature-card h-100 text-center p-4">
+            <i class="bi bi-people fs-1 text-warning mb-3"></i>
+            <h5 class="fw-bold">Nhóm</h5>
+            <p class="text-muted">Tạo hoặc tham gia nhóm học để cùng nhau học tập, rèn luyện hiệu quả hơn.</p>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card feature-card h-100 text-center p-4">
+            <i class="bi bi-newspaper fs-1 text-info mb-3"></i>
+            <h5 class="fw-bold">Bản tin sinh viên</h5>
+            <p class="text-muted">Cập nhật thông báo, hoạt động và cơ hội dành cho sinh viên trong trường.</p>
+            </div>
+        </div>
+        </div>
+    </div>
+</section>
+
 {% endblock content %}

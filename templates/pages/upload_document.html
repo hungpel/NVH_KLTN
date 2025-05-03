@@ -83,6 +83,14 @@
 </style>
 
 <div class="container py-5">
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'home' %}"><i class="bi bi-house-door-fill me-2"></i> Trang chủ</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'forums-list' %}"><i class="bi bi-file-earmark-text me-2"></i>TÀI LIỆU</a></li>
+            <li class="breadcrumb-item active" aria-current="page"><i class="bi bi-plus-circle-fill me-2"></i> Thêm tài liệu</li>
+        </ol>
+    </nav>
     <div class="upload-container">
         <form id="documentForm" method="post" action="{% url 'document-create' %}" enctype="multipart/form-data">
             {% csrf_token %}
@@ -210,7 +218,7 @@
                 progressBar.style.width = '100%';
                 progressBar.classList.add('bg-success');
                 progressBar.textContent = '✔️ Thành công!';
-                setTimeout(() => window.location.reload(), 1500);
+                window.location.href = '{% url "documents" %}';
             } else {
                 progressBar.classList.add('bg-danger');
                 progressBar.textContent = '❌ Lỗi tải lên!';

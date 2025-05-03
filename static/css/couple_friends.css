@@ -110,12 +110,7 @@ body {
     font-size: 0.9rem;
 }
 
-/* Override hoặc bổ sung các biến CSS nếu cần */
-:root {
-    --bs-primary-rgb: 52, 58, 64; /* Màu xám đậm hơn cho primary */
-    --bs-info-rgb: 23, 162, 184; /* Màu xanh teal cho info */
-    --text-darker: #343a40;
-}
+
 
 body {
     background-color: #f8f9fa;
@@ -214,11 +209,15 @@ body {
 }
 
 #request-join-page .btn-success {
-    box-shadow: 0 0.25rem 0.5rem rgba(var(--bs-success-rgb), 0.3);
+    box-shadow: 0 0.25rem 0.5rem rgba(var(--primary-color), 0.3);
+    background-color: var(--primary-color);
 }
-
+.btn-outline-success {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
 #request-join-page .btn-outline-secondary {
-    border-color: var(--bs-secondary);
+    border-color: var(--primary-color);
     color: var(--bs-secondary);
 }
 

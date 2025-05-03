@@ -3,151 +3,170 @@
 
 {% block content %}
 <div id="detail-post-body" class="container-fluid py-4">
-    <div class="pb-4">
-        <div class="col page-adress d-flex align-items-center justify-content-center">
-          <a href="{% url 'home' %}">
-            <p class="mb-0">TRANG CHỦ</p>
-          </a>
-          <span class="d-flex align-items-center"><img src="{% static 'icons/arrowRightBlack.svg' %}" class="w-100" alt="arrow"></span>
-          <a href="{% url 'profile' %}">
-            <p class="mb-0">HỒ SƠ</p>
-          </a>
-          <span class="d-flex align-items-center"><img src="{% static 'icons/arrowRightBlack.svg' %}" class="w-100" alt="arrow"></span>
-          <p class="current-page">Yêu cầu của tôi</p>
-        </div>
-    </div>
 
-    <div class="container detail-post-content">
-        <div class="row pt-4">
-            <div class="col-sm-1"></div>
-            <div class="col-sm-11 col-12 post-forum-title">
-                {{ object.name }}
-            </div>
-        </div>
-        <div class="row mt-2 post-forum-text">
-            <div class="col-sm-1"></div>
-            <div class="col-sm-11 col-12 pb-4 d-flex category-and-tags-box">
-            </div>
-        </div>
-        <div class="row mt-2 post-forum-text">
-            <div class="col-sm-1"></div>
-            <div class="col-sm-11 col-12 pb-4">
-                {{ object.description }}
-            </div>
-        </div>
-        <div class="row mt-2 post-forum-text">
-            <div class="col-sm-1"></div>
-            <div class="col-sm-11 col-12 pb-4">Giới hạn tham gia: {{ object.max_people }}</div>
-        </div>
-    </div>
-
-    <div class="container mt-4 detail-post-content">
-        <div class="row py-4 post-user-info">
-            <div class="col-12 pb-4">
-                <h5 class="d-flex align-items-center mb-3">Danh sách đã tham gia</h5>
-                <table class="table align-middle mb-0 bg-white">
-                    <thead class="bg-light">
-                        <tr>
-                            <th>ID connect</th>
-                            <th>Người dùng</th>
-                            <th>Họ và tên</th>
-                            <th>Mã số sinh viên</th>
-                            <th>Lớp</th>
-                            <th>Thông tin liên hệ</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for accepted_ticket in accepted_tickets %}
-                        <tr>
-                            <td>{{ accepted_ticket.pk }}</td>
-                            <td>{{ accepted_ticket.student.user.username }}</td>
-                            <td>{{ accepted_ticket.student }}</td>
-                            <td>{{ accepted_ticket.student.code }}</td>
-                            <td>{{ accepted_ticket.student.classroom }}</td>
-                            <td><a style="color:peru;" href="#">email: {{ accepted_ticket.student.user.email }}</a></td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-
-    <div class="container mt-4 detail-post-content">
-        <div class="row py-4 post-user-info">
-            <div class="col pb-4">
-                <h5 class="d-flex align-items-center mb-3">Danh sách gửi yêu cầu</h5>
-                {% if is_full %}
-                <tr>Yêu cầu đã đủ số người tham gia</tr>
-                {% else %}
-                <table class="table align-middle mb-0 bg-white">
-                    <thead class="bg-light">
-                        <tr>
-                            <th>ID connect</th>
-                            <th>Họ và tên</th>
-                            <th>MSSV</th>
-                            <th>Lớp</th>
-                            <th>Lời nhắn</th>
-                            <th>Hành động</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for request_ticket in request_tickets %}
-                        <tr>
-                            <td>{{ request_ticket.connect.pk }}</td>
-                            <td>{{ request_ticket.student }}</td>
-                            <td>{{ request_ticket.student.code }}</td>
-                            <td>{{ request_ticket.student.classroom }}</td>
-                            <td>{{ request_ticket.message }}</td>
-                            <td>
-                                <a href="#">
-                                    <button type="button" class="btn btn-link btn-rounded btn-sm fw-bold text-decoration-none btn-accept" onclick="accepteConnect('{{ request_ticket.pk }}')" data-mdb-ripple-color="dark">
-                                    Đồng ý
-                                    </button>
-                                </a>
-                                <a href="#">
-                                    <button type="button" class="btn btn-link btn-rounded btn-sm fw-bold text-decoration-none btn-delete" onclick="closeConnect('{{ request_ticket.pk }}')" data-mdb-ripple-color="dark">
-                                    Xóa yêu cầu
-                                    </button>
-                                </a>
-                            </td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-                {% endif %}
-            </div>
-        </div>
+  <!-- Breadcrumb -->
+  <div class="container pb-4">
+    <div class="col page-adress d-flex align-items-center justify-content-center breadcrumb">
+        <a href="{% url 'home' %}" class="breadcrumb-item"><i class="bi bi-house-door-fill me-2"></i>Trang chủ</a>
+        <img src="{% static 'icons/arrowRightBlack.svg' %}" class="mx-2" alt="arrow" height="12px">
+        <a href="{% url 'documents-list' %}" class="breadcrumb-item"><i class="bi bi-person-bounding-box me-2"></i>Hồ sơ</a>
+        <img src="{% static 'icons/arrowRightBlack.svg' %}" class="mx-2" alt="arrow" height="12px">
+        <span  class="breadcrumb-item active current-page"><i class="bi bi-people me-2"></i>Nhóm của tôi</span>
     </div>
 </div>
 
+
+<div class="container detail-post-content">
+    <div class="card border-0 shadow-sm rounded-4 p-4 mb-4">
+      <div class="card-body">
+        <h2 class="fw-bold mb-3 text-primary d-flex align-items-center">
+          <i class="bi bi-file-earmark-text me-2 fs-3"></i>
+          {{ object.name }}
+        </h2>
+  
+        <hr class="mb-4">
+  
+        <div class="mb-4 d-flex align-items-start">
+          <i class="bi bi-pencil-square me-3 fs-4 text-secondary"></i>
+          <p class="mb-0 fs-5">{{ object.description|linebreaks }}</p>
+        </div>
+  
+        <div class="d-flex align-items-center bg-light rounded p-3">
+          <i class="bi bi-people-fill me-3 fs-5 text-primary"></i>
+          <p class="mb-0 fs-6"><strong>Giới hạn tham gia:</strong> {{ object.max_people }} người</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+  <!-- Accepted Users -->
+  <div class="container mt-4 detail-post-content">
+    <div class="row py-4">
+      <div class="col-12 pb-4">
+        <h5 class="fw-bold mb-3">Danh sách đã tham gia</h5>
+        <div class="table-responsive">
+          <table class="table table-bordered table-hover align-middle bg-white">
+            <thead class="table-light">
+              <tr>
+                <th>ID connect</th>
+                <th>Người dùng</th>
+                <th>Họ và tên</th>
+                <th>Mã số sinh viên</th>
+                <th>Lớp</th>
+                <th>Thông tin liên hệ</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for accepted_ticket in accepted_tickets %}
+              <tr>
+                <td>{{ accepted_ticket.pk }}</td>
+                <td>{{ accepted_ticket.student.user.username }}</td>
+                <td>{{ accepted_ticket.student }}</td>
+                <td>{{ accepted_ticket.student.code }}</td>
+                <td>{{ accepted_ticket.student.classroom }}</td>
+                <td><a href="mailto:{{ accepted_ticket.student.user.email }}" class="text-decoration-none text-secondary">Email: {{ accepted_ticket.student.user.email }}</a></td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Request List -->
+  <div class="container mt-4 detail-post-content">
+    <div class="row py-4">
+      <div class="col pb-4">
+        <h5 class="fw-bold mb-3">Danh sách gửi yêu cầu</h5>
+
+        {% if is_full %}
+          <div class="alert alert-warning">Yêu cầu đã đủ số người tham gia</div>
+        {% else %}
+        <div class="table-responsive">
+          <table class="table table-bordered table-hover align-middle bg-white">
+            <thead class="table-light">
+              <tr>
+                <th>ID connect</th>
+                <th>Họ và tên</th>
+                <th>MSSV</th>
+                <th>Lớp</th>
+                <th>Lời nhắn</th>
+                <th>Hành động</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for request_ticket in request_tickets %}
+              <tr>
+                <td>{{ request_ticket.connect.pk }}</td>
+                <td>{{ request_ticket.student }}</td>
+                <td>{{ request_ticket.student.code }}</td>
+                <td>{{ request_ticket.student.classroom }}</td>
+                <td>{{ request_ticket.message }}</td>
+                <td>
+                  <button type="button" class="btn btn-sm btn-success me-2" onclick="accepteConnect('{{ request_ticket.pk }}')">
+                    Đồng ý
+                  </button>
+                  <button type="button" class="btn btn-sm btn-danger" onclick="closeConnect('{{ request_ticket.pk }}')">
+                    Xóa yêu cầu
+                  </button>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<style>
+  .page-address img.arrow-icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  .page-address p {
+    margin-bottom: 0;
+  }
+
+  .detail-post-content {
+    background-color: #fdfdfd;
+    padding: 1rem 2rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  }
+</style>
+
 <script>
-    console.log('ok')
-    function accepteConnect(idConnect) {
-        let data = new FormData();
-        data.append('accepted', true)
+  function accepteConnect(idConnect) {
+    let data = new FormData();
+    data.append('accepted', true)
 
-        let xhr = new XMLHttpRequest();
-        xhr.open('PUT', '/api/connect/' + idConnect + '/' , true);
-        xhr.onload = function () {
-            if (xhr.status == 200) {
-                alert('Thêm người tham gia thành công!!!');
-                location.reload()
-            }
-        };
-        xhr.send(data);
-    }
+    fetch(`/api/connect/${idConnect}/`, {
+      method: 'PUT',
+      body: data
+    }).then(res => {
+      if (res.status === 200) {
+        alert('Thêm người tham gia thành công!');
+        location.reload();
+      }
+    });
+  }
 
-    function closeConnect(idConnect) {
-        let xhr = new XMLHttpRequest();
-        xhr.open('DELETE', '/api/connect/' + idConnect + '/' , true);
-        xhr.onload = function () {
-            if (xhr.status == 204) {
-                alert('Xoá yêu cầu thành công!!!');
-                location.reload()
-            }
-        };
-        xhr.send();
-    }
+  function closeConnect(idConnect) {
+    fetch(`/api/connect/${idConnect}/`, {
+      method: 'DELETE'
+    }).then(res => {
+      if (res.status === 204) {
+        alert('Xoá yêu cầu thành công!');
+        location.reload();
+      }
+    });
+  }
 </script>
-{% endblock content %}
+{% endblock %}

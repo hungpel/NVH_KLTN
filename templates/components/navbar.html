@@ -18,12 +18,6 @@
                             Trang chủ
                         </a>
                     </li>
-                    <li class="nav-item {% if '/connects/' in request.path %}active-item{% endif %}">
-                        <a class="nav-link {% if '/connects/' in request.path %}active-animated-improved{% endif %}" href="{% url 'connects' %}">
-                            <img src="{% static 'icons/coupleFriendsIcon.svg' %}" alt="Kết nối" height="20" class="me-2 filter-white">
-                            Nhóm
-                        </a>
-                    </li>
                     <li class="nav-item {% if '/documents/' in request.path %}active-item{% endif %}">
                         <a class="nav-link {% if '/documents/' in request.path %}active-animated-improved{% endif %}" href="{% url 'documents-list' %}">
                             <img src="{% static 'icons/documentIcon.svg' %}" alt="Tài liệu" height="20" class="me-2 filter-white">
@@ -33,13 +27,19 @@
                     <li class="nav-item {% if '/forums/' in request.path %}active-item{% endif %}">
                         <a class="nav-link {% if '/forums/' in request.path %}active-animated-improved{% endif %}" href="{% url 'forums-list' %}">
                             <img src="{% static 'icons/forumIcon.svg' %}" alt="Diễn đàn" height="20" class="me-2 filter-white forum-logo">
-                            Diễn đàn
+                            Thảo luận
+                        </a>
+                    </li>
+                    <li class="nav-item {% if '/connects/' in request.path %}active-item{% endif %}">
+                        <a class="nav-link {% if '/connects/' in request.path %}active-animated-improved{% endif %}" href="{% url 'connects' %}">
+                            <img src="{% static 'icons/coupleFriendsIcon.svg' %}" alt="Kết nối" height="20" class="me-2 filter-white">
+                            Nhóm
                         </a>
                     </li>
                     <li class="nav-item {% if '/news/' in request.path %}active-item{% endif %}">
                         <a class="nav-link {% if '/news/' in request.path %}active-animated-improved{% endif %}" href="{% url 'news' %}">
                             <img src="{% static 'icons/newsIcon.svg' %}" alt="Tin tức" height="20" class="me-2 filter-white">
-                            Tin tức
+                            Bản tin
                         </a>
                     </li>
                 </ul>
@@ -60,6 +60,8 @@
         <div class="container">
             <a class="navbar-brand" href="{% url 'home' %}">
                 <img src="{% static 'img/uet1_logo.jpg' %}" alt="Logo UET" height="50" class="d-inline-block align-top">
+                <img src="{% static 'img/doan_logo.jpg' %}" alt="Logo UET" height="50" class="d-inline-block align-top">
+                <img src="{% static 'img/hoi_logo.jpg' %}" alt="Logo UET" height="50" class="d-inline-block align-top">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavCentered" aria-controls="navbarNavCentered" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -68,13 +70,13 @@
                 <ul class="navbar-nav ms-auto">
                     <li style="width: 200px;" class="nav-item profile-nav-item {% if '/profile/' in request.path %}active-item{% endif %}">
                         <a class="nav-link {% if '/profile/' in request.path %}active-animated-improved{% endif %}" href="{% url 'login' %}">
-                            <img src="{% static 'icons/personIcon.svg' %}" alt="Hồ sơ" height="20" class="me-2 filter-white">
+                            <i class="bi bi-person-circle me-2"></i>
                             Đăng nhập
                         </a>
                     </li>
                     <li style="width: 200px;" class="nav-item profile-nav-item {% if '/profile/' in request.path %}active-item{% endif %}">
                         <a class="nav-link {% if '/profile/' in request.path %}active-animated-improved{% endif %}" href="{% url 'register' %}">
-                            <img src="{% static 'icons/personIcon.svg' %}" alt="Hồ sơ" height="20" class="me-2 filter-white">
+                            <i class="bi bi-pencil-square me-2"></i>
                             Đăng ký
                         </a>
                     </li>

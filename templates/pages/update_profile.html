@@ -2,92 +2,131 @@
 {% load static %}
 
 {% block content %}
-<div class="container py-4">
-    <div class="pt-4 pb-4">
-        <div class="col page-adress d-flex align-items-center justify-content-center">
-          <a href="{% url 'home' %}">
-            <p class="mb-0">TRANG CHỦ</p>
-          </a>
-          <span class="d-flex align-items-center"><img src="{% static 'icons/arrowRightBlack.svg' %}" class="w-100" alt="arrow"></span>
-          <a href="{% url 'profile' %}">
-            <p class="mb-0">HỒ SƠ</p>
-          </a>
-          <span class="d-flex align-items-center"><img src="{% static 'icons/arrowRightBlack.svg' %}" class="w-100" alt="arrow"></span>
-          <p class="current-page">CẬP NHẬT HỒ SƠ</p>
+<div class="container py-5">
+    <!-- Breadcrumb -->
+    <div class="container pb-4">
+        <div class="col page-adress d-flex align-items-center justify-content-center breadcrumb">
+            <a href="{% url 'home' %}" class="breadcrumb-item"><i class="bi bi-house-door-fill me-2"></i>Trang chủ</a>
+            <img src="{% static 'icons/arrowRightBlack.svg' %}" class="mx-2" alt="arrow" height="12px">
+            <a href="{% url 'documents-list' %}" class="breadcrumb-item"><i class="bi bi-person-bounding-box me-2"></i>Hồ sơ</a>
+            <img src="{% static 'icons/arrowRightBlack.svg' %}" class="mx-2" alt="arrow" height="12px">
+            <span  class="breadcrumb-item active current-page"><i class="bi bi-person-fill-gear me-2"></i>Cập nhật hồ sơ</span>
         </div>
     </div>
 
     <form method="post" action="{% url 'profile-update' %}" enctype="multipart/form-data">
         {% csrf_token %}
+
         {% if messages %}
-            <div class="alert alert-success">
-                {% for message in messages %}
-                <strong>Success!</strong> {{ message }}
-                {% endfor %}
-            </div>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Thành công!</strong> {{ messages|first }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Đóng"></button>
+        </div>
         {% endif %}
-        <div class="row">
-            <div class="col-xl-4">
-                <div class="card mb-4 mb-xl-0">
-                    <div class="card-header">Ảnh hồ sơ</div>
+
+        <div class="row g-4">
+            <!-- Avatar -->
+            <div class="col-lg-4">
+                <div class="card shadow-sm border-0">
+                    <div class="card-header bg-primary text-white text-center fw-semibold">Ảnh hồ sơ</div>
                     <div class="card-body text-center">
-                        <img class="img-account-profile rounded-circle mb-2" width="150" height="150" style="object-fit: cover;" src="{{ object.avatar.url }}" alt="avt-img">
-                        <div class="small font-italic text-muted mb-4">JPG hoặc PNG không quá 5 MB</div>
-                        <input class="btn" type="file" name='avatar'/>
+                        <img src="{{ object.avatar.url }}" class="rounded-circle mb-3" width="150" height="150" style="object-fit: cover;" alt="avatar">
+                        <div class="small text-muted mb-3">Hỗ trợ JPG hoặc PNG, tối đa 5MB</div>
+                        <input class="form-control" type="file" name="avatar">
                     </div>
                 </div>
             </div>
-            <div class="col-xl-8">
-                <div class="card mb-4">
-                    <div class="card-header">Chỉnh sửa hồ sơ</div>
+
+            <!-- Thông tin hồ sơ -->
+            <div class="col-lg-8">
+                <div class="card shadow-sm border-0">
+                    <div class="card-header bg-primary text-white fw-semibold">Chỉnh sửa thông tin</div>
                     <div class="card-body">
-                            <div class="row gx-3 mb-3">
-                                <div class="col">
-                                    <label class="small mb-1" for="inputFullName">Họ</label>
-                                    <input class="form-control" id="inputFullName" name="first_name"　type="text" placeholder="Nhập tên của bạn" value="{{ object.user.first_name }}">
-                                </div>
-                                <div class="col">
-                                    <label class="small mb-1" for="inputFullName">Tên<nav></nav></label>
-                                    <input class="form-control" id="inputFullName" name="last_name"　type="text" placeholder="Nhập tên của bạn" value="{{ object.user.last_name }}">
-                                </div>
+                        <div class="row g-3 mb-3">
+                            <div class="col-md-6">
+                                <label for="first_name" class="form-label"><i class="bi bi-person-fill me-2"></i>Họ</label>
+                                <input type="text" class="form-control" name="first_name" id="first_name" placeholder="Nhập họ" value="{{ object.user.first_name }}">
                             </div>
-                            <div class="row gx-3 mb-3">
-                                <div class="col-md-6">
-                                    <label class="small mb-1" for="studentId">Mã số sinh viên</label>
-                                    <input class="form-control" id="studentId" type="text" name="code" placeholder="Nhập mã số sinh viên" value="{{ object.code }}">
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="small mb-1" for="studentClass">Lớp</label>
-                                    <input class="form-control" id="studentClass" type="text" name="classroom" placeholder="Nhập lớp khóa học" value="{{ object.classroom }}">
-                                </div>
+                            <div class="col-md-6">
+                                <label for="last_name" class="form-label"><i class="bi bi-person-circle me-2"></i>Tên</label>
+                                <input type="text" class="form-control" name="last_name" id="last_name" placeholder="Nhập tên" value="{{ object.user.last_name }}">
                             </div>
-                            <div class="row gx-3 mb-3">
-                                <div class="col-md-6">
-                                    <label class="small mb-1" for="studentEmail">Email</label>
-                                    <input class="form-control" id="studentEmail" type="email" name="email" placeholder="Nhập email" value="{{ object.user.email }}">
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="small mb-1" for="studentClass">Số điện thoại</label>
-                                    <input class="form-control" id="studentClass" type="text" name="phone" placeholder="Nhập số điện thoại" value="{{ object.phone }}">
-                                </div>
+                        </div>
+
+                        <div class="row g-3 mb-3">
+                            <div class="col-md-6">
+                                <label for="code" class="form-label"><i class="bi bi-person-check-fill me-2"></i>Mã số sinh viên</label>
+                                <input type="text" class="form-control" name="code" id="code" placeholder="Nhập MSSV" value="{{ object.code }}">
                             </div>
-                            <div class="mb-3">
-                                <label class="small mb-1" for="studentAddress">Địa chỉ</label>
-                                <input class="form-control" id="studentAddress" type="text" name="address" placeholder="Nhập địa chỉ" value="{{ object.address }}">
+                            <div class="col-md-6">
+                                <label for="classroom" class="form-label"><i class="bi bi-mortarboard-fill me-2"></i>Lớp</label>
+                                <input type="text" class="form-control" name="classroom" id="classroom" placeholder="Nhập lớp" value="{{ object.classroom }}">
                             </div>
-                            {% comment %} <div class="mb-3">
-                                <label class="small mb-1" for="studentFacebook">Link Facebook</label>
-                                <input class="form-control" id="studentFacebook" placeholder="Nhập link facebook" value="{{ object.fb_link }}">
+                        </div>
+
+                        <div class="row g-3 mb-3">
+                            <div class="col-md-6">
+                                <label for="email" class="form-label"><i class="bi bi-envelope-fill me-2"></i>Email</label>
+                                <input type="email" class="form-control" name="email" id="email" placeholder="Nhập email" value="{{ object.user.email }}">
                             </div>
-                            <div class="mb-3">
-                                <label class="small mb-1" for="studentGithub">Link Github</label>
-                                <input class="form-control" id="studentGithub" placeholder="Nhập link github" value="{{ object.github_link }}">
+                            <div class="col-md-6">
+                                <label for="phone" class="form-label"><i class="bi bi-telephone-fill me-2"></i>Số điện thoại</label>
+                                <input type="text" class="form-control" name="phone" id="phone" placeholder="Nhập số điện thoại" value="{{ object.phone }}">
                             </div>
-                            <div class="mb-3">
-                                <label class="small mb-1" for="studentInstagram">Link Instagram</label>
-                                <input class="form-control" id="studentInstagram" placeholder="Nhập link instagram" value="{{ object.instagram_link }}">
-                            </div> {% endcomment %}
-                            <button class="btn btn-primary" type="submit">Lưu thay đổi</button>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="address" class="form-label"><i class="bi bi-geo-alt-fill me-2"></i>Địa chỉ</label>
+                            <input type="text" class="form-control" name="address" id="address" placeholder="Nhập địa chỉ" value="{{ object.address }}">
+                        </div>
+                        <div class="row g-3 mb-3">
+                            <!-- Facebook -->
+                            <div class="col-md-4">
+                                <label for="facebook_link" class="form-label">
+                                    <i class="bi bi-facebook me-2"></i>Facebook
+                                </label>
+                                <input type="url" class="form-control" name="facebook_link" id="facebook_link"
+                                       placeholder="https://facebook.com/username" value="{{ object.fb_link }}">
+                                        {% if object.fb_link %}
+                                    <a href="{{ object.facebook_link }}" class="d-block mt-1 text-decoration-underline text-primary" target="_blank">
+                                        <i class="bi bi-box-arrow-up-right me-1"></i>Xem liên kết
+                                    </a>
+                                {% endif %}
+                            </div>
+                        
+                            <!-- Instagram -->
+                            <div class="col-md-4">
+                                <label for="instagram_link" class="form-label">
+                                    <i class="bi bi-instagram me-2"></i>Instagram
+                                </label>
+                                <input type="url" class="form-control" name="instagram_link" id="instagram_link"
+                                       placeholder="https://instagram.com/username" value="{{ object.instagram_link }}">
+                                {% if object.instagram_link %}
+                                    <a href="{{ object.instagram_link }}" class="d-block mt-1 text-decoration-underline text-primary" target="_blank">
+                                        <i class="bi bi-box-arrow-up-right me-1"></i>Xem liên kết
+                                    </a>
+                                {% endif %}
+                            </div>
+                        
+                            <!-- GitHub -->
+                            <div class="col-md-4">
+                                <label for="github_link" class="form-label">
+                                    <i class="bi bi-github me-2"></i>GitHub
+                                </label>
+                                <input type="url" class="form-control" name="github_link" id="github_link"
+                                       placeholder="https://github.com/username" value="{{ object.github_link }}">
+                                {% if object.github_link %}
+                                    <a href="{{ object.github_link }}" class="d-block mt-1 text-decoration-underline text-primary" target="_blank">
+                                        <i class="bi bi-box-arrow-up-right me-1"></i>Xem liên kết
+                                    </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                        
+
+                        <div class="d-grid">
+                            <button type="submit" style="background-color: #7fb1e9; " class="btn btn-lg">💾 Lưu thay đổi</button>
+                        </div>
                     </div>
                 </div>
             </div>

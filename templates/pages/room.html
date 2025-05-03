@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h1>{{ page_name }}</h1>
+    <p>Thông tin Connect:</p>
+    <ul>
+        <li>Tên: {{ connect.name }}</li>
+        <li>Mô tả: {{ connect.description }}</li>
+        <li>Số người tối đa: {{ connect.max_people }}</li>
+        <li>Người tạo: {{ connect.owner.username }}</li>
+        <li>Môn học: {{ connect.subject.name }}</li>
+        <li>Số người đã tham gia: {{ connect.count_connect }}</li>
+        <li>ID Connect: {{ connect.id }}</li>
+    </ul>
+
+    <h2>Khu vực Chat (sẽ được tích hợp sau)</h2>
+    <div id="chat-log">
+        </div>
+    <div>
+        <input type="text" id="chat-message-input" placeholder="Nhập tin nhắn">
+        <button id="chat-message-submit" disabled>Gửi</button>
+    </div>
+{% endblock %} 

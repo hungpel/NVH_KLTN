@@ -4,7 +4,7 @@
         #3b82f6 25%,  /* Blue-500 */
         #8e90f6 50%,  /* Indigo-500 */
         #1d4ed8 75%,  /* Blue-700 */
-        #6e7ce6 100%  /* Cyan blue */
+        hsl(233, 71%, 67%) 100%  /* Cyan blue */
     );
     background-size: 300% 300%;
     animation: gradientAnimationImproved 8s ease-in-out infinite;
@@ -23,3 +23,7 @@
     border-bottom-right-radius: .3rem;
     }
 }
+
+.register:hover {
+    color: var(--primary-tone);
+  }

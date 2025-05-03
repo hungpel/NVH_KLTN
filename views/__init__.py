@@ -11,8 +11,10 @@ from .profile import MyRequestPage, ProfilePage, UpdateProfilePage
 from .register import SignUp
 from .send_request import SendRequestPage
 from .welcome import WelcomePage
+from .room import ChatRoomDetailPage
 
 __all__ = [
+    "ChatRoomDetailPage",
     "SignIn",
     "WelcomePage",
     "SignUp",

@@ -18,10 +18,12 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path, re_path
 
-from views import DetailNewsPage, HomePage, NewsPage, WelcomePage, CoupleFriendPage, DocumentListView, ForumPage, ProfilePage
+from views import DetailNewsPage, HomePage, NewsPage, WelcomePage, CoupleFriendPage, DocumentListView, ForumPage, ProfilePage, ChatRoomDetailPage
 
 
 urlpatterns = [
+    # path('connec/<int:pk>/', ChatRoomDetailPage.as_view(), name='chat_room_detail'),
+    # path('connects/<int:connect_id>/', ChatRoomDetailPage.as_view(), name='chat_room_detail'),
     path("", include("app.urls")),
     path("api/", include("api.urls")),
     re_path(r"^admin/", admin.site.urls),
