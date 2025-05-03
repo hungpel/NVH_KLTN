@@ -361,3 +361,17 @@
     border-color: #0a58ca;
     box-shadow: 0 0.3rem 0.7rem rgba(var(--bs-primary-rgb), 0.3); /* Tăng bóng đổ khi hover */
 }
+
+/* #forum-filter .btn {
+    font-weight: 500;
+    padding: 0.4rem 0.9rem;
+}
+
+#forum-filter .btn-outline-secondary {
+    color: #555;
+    border-color: #ccc;
+}
+
+#forum-filter .btn-outline-secondary:hover {
+    background-color: #eee;
+} */

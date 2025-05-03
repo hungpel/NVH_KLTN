@@ -7,8 +7,12 @@ from .base import *  # noqa
 from .base import INSTALLED_APPS, MIDDLEWARE
 
 
+ASGI_APPLICATION = 'app.asgi.application'
+
+
 INSTALLED_APPS += [
     "debug_toolbar",
+    'channels',
 ]
 
 # Ref: https://django-debug-toolbar.readthedocs.io/en/latest/installation.html

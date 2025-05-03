@@ -19,7 +19,7 @@
     <div class="container d-flex justify-content-between align-items-center">
         <div>
             <button data-bs-toggle="modal" data-bs-target="#subject-filter" class="btn btn-outline-primary me-3 filter-content rounded-pill shadow">
-                <i class="bi bi-funnel-fill me-2"></i> Lọc môn học
+                <i class="bi bi-funnel-fill me-2"></i> Lọc tài liệu
             </button>
             <a href="{% url 'document-create' %}" class="btn btn-primary filter-content rounded-pill shadow">
                 <i class="bi bi-upload me-2"></i> Đóng góp tài liệu
@@ -31,8 +31,8 @@
 
 <div class="modal fade" id="subject-filter" tabindex="-1" aria-labelledby="subjectFilterLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content shadow-lg rounded-4 border-0">
-            <div class="modal-header bg-primary text-white rounded-top-4">
+        <div class="modal-content rounded-4 border-0">
+            <div class="modal-header text-white rounded-top-4">
                 <h5 class="modal-title" id="subjectFilterLabel"><i class="bi bi-funnel-fill me-2"></i> Chọn môn học</h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
@@ -55,11 +55,6 @@
                     </div>
                     {% endfor %}
                 </div>
-            </div>
-            <div class="modal-footer justify-content-end bg-light rounded-bottom-4">
-                <button class="btn btn-success px-4 py-2 rounded-pill fw-semibold">
-                    <i class="bi bi-check-circle me-2"></i>Áp dụng
-                </button>
             </div>
         </div>
     </div>

@@ -3,6 +3,7 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
+    path('connects/<int:connect_id>/', views.ChatRoomDetailView.as_view(), name='chat_room_detail'),
     path(
         "documents/", views.DocumentListView.as_view(), name="documents-list"
     ),

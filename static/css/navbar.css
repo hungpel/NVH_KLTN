@@ -3,15 +3,9 @@
     font-family: inherit;
 }
 
-/* Cải thiện hiệu ứng gradient */
+/* Hiệu ứng gradient động cho navbar */
 .bg-gradient-animated {
-    background: linear-gradient(135deg,
-        #0ea5e9 0%,   /* Cyan blue */
-        #3b82f6 25%,  /* Blue-500 */
-        #6366f1 50%,  /* Indigo-500 */
-        #1d4ed8 75%,  /* Blue-700 */
-        #0ea5e9 100%  /* Cyan blue */
-    );
+    background: linear-gradient(135deg, #0ea5e9 0%, #3b82f6 25%, #6366f1 50%, #1d4ed8 75%, #0ea5e9 100%);
     background-size: 300% 300%;
     animation: gradientAnimationImproved 8s ease-in-out infinite;
 }
@@ -22,12 +16,49 @@
     100% { background-position: 0% 50%; }
 }
 
-
-/* Thêm bóng đổ */
+/* Bóng đổ cho navbar */
 .navbar-dark.shadow-lg {
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
 }
 
+/* Стиль cho logo diễn đàn */
+.forum-link img[alt="Diễn đàn"] {
+    height: 24px;
+    vertical-align: middle;
+}
+
+/* Bố cục navbar để căn giữa các mục */
+.navbar-collapse.justify-content-center,
+.navbar-nav.mx-auto {
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Thêm căn giữa dọc cho nhất quán */
+    width: 100%;
+}
+
+.navbar-collapse.justify-content-center {
+    flex-grow: 1;
+}
+
+.navbar-nav.mx-auto .nav-item {
+    /* padding: 0 0.75rem; */
+    padding: 0.3rem;
+    margin: 0 0.5rem; /* Sử dụng margin rút gọn */
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.navbar-nav.mx-auto > .nav-item:first-child { /* Loại bỏ margin-left không cần thiết */
+    margin-left: 0;
+}
+
+.navbar-nav.mx-auto > .nav-item:last-child { /* Loại bỏ margin-right không cần thiết */
+    margin-right: 0;
+}
+
+
+/* Стиль cho thương hiệu (logo và tên) */
 .navbar-dark .navbar-brand {
     color: white;
     font-size: 1.5rem;
@@ -35,27 +66,19 @@
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
 }
 
+/* Стиль cho các liên kết điều hướng */
 .navbar-dark .nav-link {
     color: white;
     position: relative;
     overflow: hidden;
     z-index: 1;
     padding: 0.7rem 1rem;
+    display: flex;
+    align-items: center;
     transition: color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
-.navbar-dark .nav-link::before {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 3px;
-    background: rgba(255, 255, 255, 0.8);
-    transform: translateY(100%);
-    transition: transform 0.3s ease-in-out;
-    z-index: -1;
-}
+
 
 .navbar-dark .nav-link:hover {
     color: white;
@@ -66,79 +89,17 @@
     transform: translateY(0);
 }
 
+/* Стиль cho liên kết active */
 .navbar-dark .nav-link.active-animated-improved {
     font-weight: bold;
     color: white;
-}
-
-.navbar-dark .nav-link.active-animated-improved::after {
-    background: #1D4ED8; /* Xanh dương đậm (primary) */
-}
-
-.navbar-dark .navbar-toggler-icon {
-    background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3e%3cpath stroke='rgba(255, 255, 255, 0.8)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
-}
-
-.filter-white {
-    filter: brightness(0) invert(1);
-}
-
-/* Стиль cho logo diễn đàn */
-.forum-link img[alt="Diễn đàn"] {
-    height: 24px;
-    vertical-align: middle;
-}
-
-.forum-link {
-    /* padding-left: 0; */
-}
-
-/* Điều chỉnh bố cục navbar để căn giữa các mục */
-.navbar-collapse.justify-content-center {
-    display: flex; /* Sử dụng flexbox cho phần tử chứa các mục giữa */
-    justify-content: center; /* Căn giữa các mục theo chiều ngang */
-    align-items: center; /* căn giữa theo chiều dọc */
-    flex-grow: 1; /* Cho phép nó chiếm không gian có sẵn */
-}
-
-.navbar-nav.mx-auto {
-    display: flex; /* Sử dụng flexbox cho danh sách các mục giữa */
-    justify-content: center; /* Căn giữa các mục theo chiều ngang */
-
-    width: 100%; /* Đảm bảo nó chiếm toàn bộ chiều rộng có sẵn */
-}
-
-.navbar-nav.mx-auto .nav-item {
-    padding: 0 0.75rem;
-    margin-left: 0; /* Loại bỏ margin mặc định có thể gây lệch */
-    margin-right: 0; /* Loại bỏ margin mặc định có thể gây lệch */
-    display: flex;
-    align-items: center; /* căn giữa theo chiều dọc */
-    height: 100%; /* đảm bảo chiều cao không bị bóp */
-}
-
-.navbar-nav.mx-auto > .nav-item:not(:last-child) {
-    margin-right: 1rem; /* Tạo khoảng cách giữa các mục */
-}
-
-.navbar-nav.ms-auto {
-    /* Đẩy mục "Hồ sơ" sang phải */
-}
-
-/* ... các style CSS khác giữ nguyên ... */
-
-.navbar-dark .nav-link.active-animated-improved {
-    font-weight: bold;
-    color: white;
-    position: relative; /* Để định vị thanh trượt active */
-    display: flex;
-    align-items: center;
+    position: relative;
 }
 
 .navbar-dark .nav-link.active-animated-improved::after {
     content: '';
     position: absolute;
-    bottom: -3px; /* Hiển thị ở phía dưới */
+    bottom: -3px;
     left: 0;
     width: 100%;
     height: 3px;
@@ -146,97 +107,56 @@
     transform: scaleX(0);
     transform-origin: left;
     transition: transform 0.3s ease-in-out;
-    z-index: 2; /* Đảm bảo trên pseudo-element hover */
+    z-index: 2;
 }
 
 .navbar-dark .nav-link.active-animated-improved:hover::after,
 .navbar-dark .nav-link.active-animated-improved.show::after,
-.navbar-dark .nav-link.active::after { /* Thêm cho các trạng thái active khác nếu cần */
-    transform: scaleX(1); /* Hiển thị thanh trượt khi active */
+.navbar-dark .nav-link.active::after {
+    transform: scaleX(1);
 }
 
-/* Loại bỏ style gạch chân cũ cho active */
-.navbar-dark .nav-link.active-animated-improved::after {
-    /* Các thuộc tính đã được chuyển lên trên */
+/* Стиль cho nút toggler */
+.navbar-dark .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3e%3cpath stroke='rgba(255, 255, 255, 0.8)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
 }
 
-/* ... các style CSS khác giữ nguyên ... */
+/* Стиль cho icon màu trắng */
+.filter-white {
+    filter: brightness(0) invert(1);
+}
 
+/* Стиль cho item active */
 .navbar-dark .nav-item.active-item {
-    background-color: rgba(255, 255, 255, 0.1); /* Màu nền active nhẹ */
-    padding: 0.5rem;
-    border-radius: 5px; /* Bo góc nhẹ (tùy chọn) */
-    margin-bottom: 100px;
-}
-
-.navbar-dark .nav-link.active-animated-improved {
-    font-weight: bold;
-    color: white;
-    /* Loại bỏ các style ::after cho active */
-}
-
-/* ... các style CSS khác giữ nguyên ... */
-
-.navbar-dark .nav-item.active-item {
-    background-color: rgba(255, 255, 255, 0.15); /* Màu nền active rõ hơn */
-    border-radius: 5px; /* Bo góc nhẹ (tùy chọn) */
-    margin-bottom: -10px; /* Đẩy item xuống bằng độ dày của border-bottom */
+    background-color: rgba(255, 255, 255, 0.15);
+    border-radius: 5px;
     border: 1px solid white;
 }
 
-.navbar-dark .nav-profile .nav-item.active-item {
-    padding: 1000px;
-}
-
-.navbar-dark .nav-link.active-animated-improved {
-    font-weight: bold;
-    color: white;
-    /* Loại bỏ các style ::after cho active nếu bạn đã thử các ý tưởng khác */
-}
-
-/* Để tránh hiệu ứng hover bị ảnh hưởng bởi margin-bottom */
-.navbar-dark .nav-item:hover {
-    transform: translateY(-2px); /* Nhấc nhẹ item khi hover (tùy chọn) */
-    transition: transform 0.2s ease-in-out;
-}
-
-.navbar-dark .nav-item.active-item:hover {
-    transform: translateY(0); /* Không nhấc item active khi hover */
-}
-
-/* ... các style CSS khác giữ nguyên ... */
-
+/* Стиль cho item profile */
 .navbar-dark .nav-item.profile-nav-item {
-    /* Tăng kích thước trực tiếp cho li */
-    width: 120px; /* Điều chỉnh giá trị này cho đến khi đạt kích thước mong muốn */
-    /* Tùy chọn: điều chỉnh chiều cao dòng hoặc chiều cao nếu cần */
-    /* line-height: 2.5; */
-    display: flex; /* Để căn chỉnh nội dung bên trong */
-    justify-content: center; /* Căn giữa nội dung theo chiều ngang */
-    align-items: center; /* Căn giữa nội dung theo chiều dọc */
+    width: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .navbar-dark .nav-link.profile-link {
-    display: flex; /* Đảm bảo flex để căn chỉnh avatar và chữ */
+    display: flex;
     align-items: center;
-    width: 100%; /* Chiếm toàn bộ chiều rộng của li */
-    justify-content: flex-start; /* Căn trái avatar và chữ */
-    padding: 0.5rem 1rem; /* Điều chỉnh padding bên trong link */
+    width: 100%;
+    justify-content: flex-start;
+    padding: 0.5rem 1rem;
 }
 
 .user-avatar {
-    width: 24px; /* Giữ nguyên kích thước avatar */
+    width: 24px;
     height: 24px;
     object-fit: cover;
-    margin-right: 0.5rem; /* Giữ nguyên khoảng cách với chữ */
+    margin-right: 0.5rem;
 }
 
-/* Điều chỉnh lại khoảng cách các mục ở giữa nếu cần */
-.navbar-nav.mx-auto > .nav-item:not(:last-child) {
-    margin-right: 0.5rem; /* Giảm khoảng cách nếu navbar trở nên quá rộng */
-}
-
-
+/* Стиль cho các nút menu ở trang welcome (có vẻ không thuộc navbar chính) */
 navbar_welcome .menu-button {
     height: 2.5rem;
     width: max-content;
@@ -258,7 +178,7 @@ navbar_welcome .menu-button > a {
     font-size: 0.75rem;
     line-height: 1.024rem;
     color: #161616;
-    padding: 0.75rem 1.125rem 0.75rem 1.125rem;
+    padding: 0.75rem 1.125rem;
     gap: 0.625rem;
 }
 
@@ -290,7 +210,7 @@ navbar_welcome ul {
     padding-left: 0;
 }
 
-navbar_welcome ul>li {
+navbar_welcome ul > li {
     height: 3rem;
     border-radius: 0.625rem;
     display: flex;
@@ -299,7 +219,7 @@ navbar_welcome ul>li {
     margin-bottom: 1.25rem;
 }
 
-navbar_welcome ul>li:hover {
+navbar_welcome ul > li:hover {
     background-color: #1358e3;
     cursor: pointer;
 }

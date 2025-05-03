@@ -13,16 +13,26 @@
             margin: 0;
             padding: 0;
         }
-
+        :root {
+            --primary-tone: #4871f7;
+            --primary-tone-darker: #0a0074;
+            --text-primary: #333;
+            --text-secondary: #6c757d;
+            --bs-primary: #3279e2;
+            --bs-secondary: #6c757d;
+            --bs-success: #198754;
+            --box-shadow-light: 0 0.3rem 0.7rem rgba(var(--primary-tone-darker), 0.15); /* Bóng tinh tế hơn */
+            --card-border-color: #e0f0ff; /* Viền card nhạt */
+            --gradient-primary: linear-gradient(135deg, var(--primary-tone) 0%, #38bfe5 100%); /* Gradient nhẹ */
+            --link-color: var(--bs-primary);
+            --link-hover-color: darken(var(--bs-primary), 15%);
+            --comment-bg: #f8faff;
+            --comment-border: #e0f0ff;
+        }
         body {
-            font-family: 'Work Sans', sans-serif;
-            background: linear-gradient(135deg,
-                #abd6da 0%,   /* Cyan blue */
-                #3b82f6 25%,  /* Blue-500 */
-                #8e90f6 50%,  /* Indigo-500 */
-                #1d4ed8 75%,  /* Blue-700 */
-                #6e7ce6 100%  /* Cyan blue */
-            );
+            background-image: url(../static/img/background_register.jpg);
+            background-size: cover;
+            font-family: inherit;
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -31,7 +41,7 @@
         }
 
         .glass-card {
-            background: rgba(255, 255, 255, 0.7);
+            background: var(--gradient-primary);
             backdrop-filter: blur(15px);
             border-radius: 25px;
             box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
@@ -41,11 +51,11 @@
         }
 
         .title {
-            font-family: 'Big Shoulders Display';
+            font-family: inherit;
             font-size: 3rem;
             text-align: center;
             margin-bottom: 2rem;
-            color: #222;
+            color: #fdfbfb;
         }
 
         .form-grid {
@@ -61,10 +71,10 @@
         }
 
         .label {
-            font-family: 'Big Shoulders Display';
+            font-family: inherit;
             font-size: 1rem;
             margin-bottom: 0.5rem;
-            color: #333;
+            color: #f6f4f4;
         }
 
         .input-wrapper {
@@ -111,7 +121,7 @@
             padding: 0.75rem 2rem;
             border: none;
             border-radius: 15px;
-            font-family: 'Manrope';
+            font-family: inherit;
             font-size: 1.1rem;
             font-weight: 600;
             cursor: pointer;
@@ -201,8 +211,8 @@
             <div class="input-group">
                 <label class="label">Giới tính</label>
                 <div class="radio-container">
-                    <label><input type="radio" name="gender" value="Nam" checked> Nam</label>
-                    <label><input type="radio" name="gender" value="Nữ"> Nữ</label>
+                    <label style="color: white;"><input type="radio" name="gender" value="Nam" checked> Nam</label>
+                    <label style="color: white;"><input type="radio" name="gender" value="Nữ"> Nữ</label>
                 </div>
             </div>
             <div class="input-group">

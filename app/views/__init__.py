@@ -15,8 +15,10 @@ from .post.list import ArticleListView
 from .profile.detail import ProfileDetailView
 from .profile.update import ProfileUpdateView
 from .profile.your_connect_detail import YourConnectDetailView
+from .room_chat import ChatRoomDetailView
 
 __all__ = [
+    "ChatRoomDetailView",
     "DocumentListView",
     "LoginView",
     "ProfileDetailView",

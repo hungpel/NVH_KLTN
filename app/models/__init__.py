@@ -16,8 +16,11 @@ from .slider import Slider
 from .student import Student
 from .subject import Subject
 from .tag import Tag
+from .room_chat import ChatRoom, Message
 
 __all__ = [
+    "ChatRoom",
+    "Message",
     "BaseModel",
     "Category",
     "Comment",

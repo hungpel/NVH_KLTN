@@ -4,20 +4,15 @@
 {% block content %}
 <div id="mainNews">
   <div class="container-fluid ps-0 pe-0">
-    <div class="pt-4 pb-4">
-      <div class="col page-adress d-flex align-items-center justify-content-center">
-        <a href="{% url 'home' %}">
-          <p class="mb-0">TRANG CHỦ</p>
-        </a>
-        <span class="d-flex align-items-center"><img src="{% static 'icons/arrowRightBlack.svg' %}" class="w-100" alt="arrow"></span>
-        <a href="{% url 'news' %}">
-          <p class="mb-0">TIN TỨC</p>
-        </a>
-        <span class="d-flex align-items-center"><img src="{% static 'icons/arrowRightBlack.svg' %}" class="w-100" alt="arrow"></span>
-        <p class="current-page">CHI TIẾT</p>
-      </div>
-    </div>
-
+    <div id="detail-post-body" class="container py-5">
+      <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="{% url 'home' %}"><i class="bi bi-house-door-fill me-2"></i> Trang chủ</a></li>
+              <li class="breadcrumb-item"><a href="{% url 'news' %}"><i class="bi bi-chat-dots-fill me-2"></i>Bản tin</a></li>
+              <li class="breadcrumb-item active" aria-current="page"><i class="bi bi-receipt-cutoff me-2"></i>Chi tiết tin tức</li>
+          </ol>
+      </nav>
+  </div>
     <div class="bg-white d-flex justify-content-center">
         <div class="col-md-10 col d-flex justify-content-center">
             <img src="{% if post.main_image %}{{ post.main_image.url }}{% else %}{% static 'img/news/default-image.jpg' %}{% endif %}" class="news-main-image w-100 ps-1 pe-1 pt-3 pb-3" alt="detail-product">

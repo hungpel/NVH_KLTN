@@ -74,6 +74,18 @@ def send_request_view(request):
     )
 
 
+def room_view(request):
+
+    return render(
+        request,
+        "pages/room.html",
+        context={
+            "page_name": "room",
+        },
+    )
+
+
+
 def documents_view(request):
 
     # TODO: add get post in documents
@@ -190,6 +202,7 @@ def add_forum_view(request):
             "page_name": "add_forum",
         },
     )
+
 
 
 def news_view(request):
