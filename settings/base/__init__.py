@@ -12,6 +12,6 @@ from .internationalization import *
 from .logging import *
 from .middleware import *
 from .password import *
-from .sentry import *
+# from .sentry import *
 from .static import *
 from .templates import *
