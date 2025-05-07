@@ -1,9 +1,6 @@
 name: Uniconnect Deployment
 
 on:
-  pull_request:
-    branches: 
-      - 'main'
   push:
     branches:
       - 'main'
@@ -30,8 +27,8 @@ jobs:
               python3 -m venv venv
             fi
             source venv/bin/activate
-            pip install -r requirements.dev.txt
-            pip install -r requirements.txt
+            pip install --no-cache-dir -r requirements.dev.txt
+            pip install --no-cache-dir -r requirements.txt
             python manage.py migrate
             python manage.py collectstatic --noinput
             sudo supervisorctl restart uniconnect
