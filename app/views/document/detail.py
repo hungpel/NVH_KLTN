@@ -6,6 +6,7 @@ from django.views.generic import DetailView
 
 from app.models import Comment, Document, Like
 from libs import BaseViewMixin
+from app.ai.search_engine import get_related_documents
 
 
 class DocumentDetailView(LoginRequiredMixin, BaseViewMixin, DetailView):
@@ -29,4 +30,6 @@ class DocumentDetailView(LoginRequiredMixin, BaseViewMixin, DetailView):
             content_type=content_type,
             object_id=document.pk,
         ).count()
+        related_docs = get_related_documents(document, top_k=5)
+        context["related_documents"] = related_docs
         return context
