@@ -4,6 +4,7 @@
 {% block content %}
 
 <div id="detail-post-body" class="container-fluid py-4">
+    
     <div class="container pb-4">
         <div class="col page-adress d-flex align-items-center justify-content-center breadcrumb">
             <a href="{% url 'home' %}" class="breadcrumb-item"><i class="bi bi-house-door-fill me-2"></i>TRANG CHỦ</a>
@@ -149,7 +150,28 @@
                 </button>
             </div>
         </div>
+        <div class="container mt-5 related-documents-section">
+            <h5 class="mb-3"><i class="bi bi-lightbulb-fill me-2"></i>Gợi ý tài liệu liên quan</h5>
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                {% for doc in related_documents %}
+                    <div class="col">
+                        <div class="card related-document-card shadow-sm h-100 border-light rounded-3">
+                            <div class="card-body">
+                                <h6 class="card-title text-truncate" style="font-size: 1.1rem;">{{ doc.name }}</h6>
+                                <p class="card-text text-muted" style="font-size: 0.9rem; margin-bottom: 10px;">
+                                    <b>Mô tả: </b>{{ doc.description|truncatechars:100 }}
+                                </p>
+                                <a href="{% url 'document-detail' doc.pk %}" class="btn btn-outline-primary btn-sm">Xem chi tiết</a>
+                            </div>
+                        </div>
+                    </div>
+                {% empty %}
+                    <p class="text-muted">Không có gợi ý tài liệu liên quan.</p>
+                {% endfor %}
+            </div>
+        </div>
     </div>
+
 </div>
 
 

@@ -17,6 +17,11 @@ class Document(BaseModel):
         blank=True,
         null=True,
     )
-
     def __str__(self):
         return f"{self.name}"
+
+    @staticmethod
+    def load_documents_from_db():
+        return list(Document.objects.all())
+
+

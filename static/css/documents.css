@@ -554,3 +554,128 @@
   transform: translateY(-1px);
   box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.1);
 }
+
+
+/* --- Стиль cho phần Gợi ý tài liệu liên quan --- */
+.related-documents-section {
+  margin-top: 3rem;
+  padding: 2rem;
+  background-color: #f8f9fa; /* Nền nhạt để phân biệt */
+  border-radius: 0.75rem;
+}
+
+.related-documents-section h5 {
+  color: var(--primary-tone-darker);
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+}
+
+.related-documents-section .row {
+  display: flex; /* Sử dụng Flexbox cho hàng */
+  flex-wrap: wrap; /* Cho phép xuống dòng */
+  margin-left: -15px;
+  margin-right: -15px;
+}
+
+.related-documents-section .col {
+  display: flex; /* Để card có thể stretch */
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-bottom: 1.5rem;
+}
+
+.related-document-card {
+  border: 1px solid var(--card-border-color);
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* Thẻ cao bằng cột */
+  flex-grow: 1; /* Cho phép thẻ giãn ra */
+  width: 100%; /* Đảm bảo thẻ chiếm toàn bộ chiều rộng cột */
+}
+
+.related-document-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+}
+
+.related-document-card .card-body {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
+  min-height: 150px; /* Tùy chọn: chiều cao tối thiểu cho phần nội dung */
+}
+
+.related-document-card .card-title {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: var(--text-primary);
+  margin-bottom: 0.75rem;
+  overflow: hidden; 
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Thử với 1 để kiểm tra */
+  -webkit-box-orient: vertical;
+  white-space: normal; /* Đảm bảo chữ có thể xuống dòng */
+  text-overflow: ellipsis; /* Thêm dấu "..." nếu trình duyệt không hỗ trợ line-clamp (fallback) */
+  line-height: 1.2; /* Điều chỉnh nếu cần */
+  /* padding-top: 0; */ /* Đảm bảo không có padding thừa */
+  /* padding-bottom: 0; */
+  /* margin-top: 0; */
+  /* margin-bottom: 0.75rem; */ /* Giữ lại margin cần thiết */
+}
+
+.related-document-card .card-text {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  flex-grow: 1;
+}
+
+.related-document-card .btn-outline-primary {
+  border-color: var(--bs-primary);
+  color: var(--bs-primary);
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+  align-self: flex-start;
+}
+
+.related-document-card .btn-outline-primary:hover {
+  background-color: var(--bs-primary);
+  color: white;
+}
+
+.related-documents-section .text-muted {
+  /* padding-left: 1.5rem; */
+  font-style: italic;
+}
+
+/* Điều chỉnh layout cho các card trên màn hình lớn hơn */
+@media (min-width: 768px) {
+  .related-documents-section .col-md-4 {
+      /* flex-basis sẽ xác định kích thước ban đầu của mỗi item */
+      flex-basis: calc(33.333% - 30px); /* Chiều rộng 1/3 trừ đi margin */
+      flex-grow: 0; /* Không cho phép item lớn hơn kích thước cơ sở */
+      max-width: calc(33.333% - 30px); /* Đảm bảo không vượt quá kích thước cơ sở */
+      margin-right: 15px;
+      margin-left: 15px;
+      margin-bottom: 1.5rem;
+  }
+  .related-documents-section .row {
+      justify-content: flex-start; /* Căn các item từ trái sang */
+  }
+}
+
+@media (max-width: 576px) {
+  .related-documents-section h5 {
+      padding-left: 1rem;
+  }
+  .related-documents-section .text-muted {
+      padding-left: 1rem;
+  }
+}
+
